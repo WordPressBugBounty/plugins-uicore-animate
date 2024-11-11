@@ -3,14 +3,14 @@
 Plugin Name: UiCore Animate
 Plugin URI: https://animate.uicore.co
 Description: Animate your design in just a few clicks.
-Version: 1.0.11
+Version: 2.0.0
 Author: UiCore
 Author URI: https://uicore.co
 License: GPL3
 Text Domain: uicore-animate
 Domain Path: /languages
  * Elementor requires at least: 3.8.0
- * Elementor tested up to: 3.23.4
+ * Elementor tested up to: 3.25.4
 */
 
 namespace UiCoreAnimate;
@@ -31,7 +31,7 @@ final class Base
      *
      * @var string
      */
-    public $version = '1.0.11';
+    public $version = '2.0.0';
 
     /**
      * Holds various class instances
@@ -115,7 +115,7 @@ final class Base
         define('UICORE_ANIMATE_INCLUDES', UICORE_ANIMATE_PATH . '/includes');
         define('UICORE_ANIMATE_URL', plugins_url('', UICORE_ANIMATE_FILE));
         define('UICORE_ANIMATE_ASSETS', UICORE_ANIMATE_URL . '/assets');
-        define('UICORE_ANIMATE_BADGE', '<span title="Powerd by UiCore Animate" style="font-size:11px;font-weight:500;text-transform:uppercase;background:#5dbad8;color:black;padding:2px 5px;border-radius:3px;margin-right:4px;">Animate</span> ');
+        define('UICORE_ANIMATE_BADGE', '<span title="Powerd by UiCore Animate" style="font-size:10px;font-weight:500;background:#5dbad8;color:black;padding:2px 5px;border-radius:3px;margin-right:4px;">UiCore</span> ');
     }
 
     /**
@@ -153,9 +153,7 @@ final class Base
      *
      * Nothing being called here yet.
      */
-    public function deactivate()
-    {
-    }
+    public function deactivate() {}
 
     /**
      * Include the required files

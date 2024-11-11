@@ -25,7 +25,8 @@ class Elementor
             //TODO: ADD uicore-the-title and uicore-page-description widgets
 
             //Floating Widget
-            add_action('elementor/element/before_section_end', [$this, 'register_controls_for_float'], 10, 3);
+            add_action('elementor/element/before_section_end', [$this, 'register_controls_for_animations'], 10, 3);
+
 
             //Fluid Gradient extender
             add_action('elementor/element/section/section_advanced/before_section_start', [$this, 'fluid_gradient_controls']);
@@ -63,15 +64,8 @@ class Elementor
     public static function new_animations($animations)
     {
         $new_animations = [
-            'ZoomOut - UiCore Animate' => [
-                'zoomOut' => 'Zoom Out',
-                'zoomOutDown' => 'Zoom Out Down',
-                'zoomOutLeft' => 'Zoom Out Left',
-                'zoomOutRight' => 'Zoom Out Right',
-                'zoomOutUp' => 'Zoom Out Up',
-            ],
+            'ZoomOut' => Helper::get_custom_animations_list()
         ];
-
         return \array_merge($animations, $new_animations);
     }
 
@@ -264,7 +258,7 @@ class Elementor
         }
     }
 
-    function register_controls_for_float($widget, $widget_id, $args)
+    function register_controls_for_animations($widget, $widget_id, $args)
     {
         static $widgets = [
             'section_effects', /* Section */
@@ -273,7 +267,104 @@ class Elementor
         if (!in_array($widget_id, $widgets)) {
             return;
         }
+        //remove 'animation' control
+        $widget->remove_control('animation');
+        $widget->remove_responsive_control('_animation');
 
+
+        // add select for Trigger type
+        $widget->add_control(
+            'uicore_trigger_type',
+            [
+                'label' => UICORE_ANIMATE_BADGE . __('Trigger Type', 'uicore-animate'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    '' => __('Enrance', 'uicore-animate'),
+                    'uicore-animate-scroll' => __('Scroll', 'uicore-animate'),
+                ],
+                'default' => '',
+                'prefix_class' => '',
+                'frontend_available' => true,
+            ]
+        );
+        //add the animation controller
+        $widget->add_responsive_control(
+            '_animation',
+            [
+                'label' => esc_html__('Entrance Animation', 'elementor'),
+                'type' => Controls_Manager::ANIMATION,
+                'frontend_available' => true,
+                'condition' => [
+                    'uicore_trigger_type' => '',
+                ],
+            ]
+        );
+        //add the scroll animation controller
+        $widget->add_control(
+            'uicore_scroll_animation',
+            [
+                'label' => UICORE_ANIMATE_BADGE . esc_html__('Scroll Animation', 'elementor'),
+                'type' => Controls_Manager::ANIMATION,
+                'prefix_class' => '',
+                'condition' => [
+                    'uicore_trigger_type' => 'uicore-animate-scroll',
+                ],
+            ]
+        );
+        //add offset start controll for scroll
+        $widget->add_control(
+            'uicore_scroll_offset_start',
+            [
+                'label' => UICORE_ANIMATE_BADGE . esc_html__('Start Offset (vh)', 'uicore-animate'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'vh' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'vh',
+                    'size' => 10,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}}' => '--ui-anim-start: {{SIZE}}vh',
+                ],
+                'condition' => [
+                    'uicore_trigger_type' => 'uicore-animate-scroll',
+                ],
+            ]
+        );
+        //add offset end controll for scroll
+        $widget->add_control(
+            'uicore_scroll_offset_end',
+            [
+                'label' => UICORE_ANIMATE_BADGE . esc_html__('End Offset (vh)', 'uicore-animate'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'vh' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'vh',
+                    'size' => 50,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}}' => '--ui-anim-end: {{SIZE}}vh',
+                ],
+                'condition' => [
+                    'uicore_trigger_type' => 'uicore-animate-scroll',
+                ],
+            ]
+        );
+
+
+
+        //add  float at the end
         $widget->add_control(
             'uicore_enable_float',
             [

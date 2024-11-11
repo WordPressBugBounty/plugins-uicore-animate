@@ -25,7 +25,7 @@ class Frontend
             if (is_array($style)) {
                 $this->style = $style['value'];
             } else {
-                $this->style = null;
+                $this->style = 'style1';
             }
 
             if ($this->style) {
@@ -38,9 +38,7 @@ class Frontend
             }
 
             //scroll
-            if (Settings::get_option('uianim_scroll')  == 'true') {
-                add_action('wp_enqueue_scripts', [$this, 'scroll'], 60);
-            }
+            add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts'], 60);
         } else {
             //add the resources to global files in UiCore Framework
             add_filter('uicore_css_global_files', [$this, 'add_css_to_framework'], 10, 2);
@@ -64,7 +62,13 @@ class Frontend
      */
     public function scroll()
     {
-        wp_enqueue_script('uianim-scroll', UICORE_ANIMATE_ASSETS . '/js/scroll.js',  UICORE_ANIMATE_VERSION, true);
+        //scroll
+        if (Settings::get_option('uianim_scroll')  == 'true') {
+            wp_enqueue_script('uianim-scroll', UICORE_ANIMATE_ASSETS . '/js/scroll.js',  UICORE_ANIMATE_VERSION, true);
+        }
+        if (\class_exists('\UiCoreBlocks\Base')) {
+            wp_enqueue_script('uianim-entrance-animation', UICORE_ANIMATE_ASSETS . '/js/entrance-animation.js',  UICORE_ANIMATE_VERSION, true);
+        }
     }
 
 
@@ -76,9 +80,9 @@ class Frontend
             $style = isset($style['value']) ? $style['value'] : 'style1';
             $files[] = UICORE_ANIMATE_PATH . '/assets/css/' . $style . '.css';
 
-            if ($settings['performance_ugly_animations'] === 'false') {
-                $files[] =  UICORE_ANIMATE_PATH . '/assets/css/global.css';
-            }
+            // if ($settings['performance_ugly_animations'] === 'false') {
+            //     $files[] =  UICORE_ANIMATE_PATH . '/assets/css/global.css';
+            // }
         }
 
         return $files;
@@ -88,6 +92,9 @@ class Frontend
     {
         if ($settings['performance_animations'] === 'true' && $settings['uianim_scroll'] == 'true') {
             $files[] =  UICORE_ANIMATE_PATH . '/assets/js/scroll.js';
+        }
+        if (\class_exists('\UiCoreBlocks\Base')) {
+            $files[] =  UICORE_ANIMATE_PATH . '/assets/js/entrance-animation.js';
         }
 
         return $files;

@@ -35,4 +35,60 @@ class Helper
         $new_animations = apply_filters('uicore_split_animations_list', []);
         return array_merge($animations, $new_animations);
     }
+
+    static function get_custom_animations_list()
+    {
+        return [
+            'zoomOut' => 'Zoom Out',
+            'zoomOutDown' => 'Zoom Out Down',
+            'zoomOutLeft' => 'Zoom Out Left',
+            'zoomOutRight' => 'Zoom Out Right',
+            'zoomOutUp' => 'Zoom Out Up',
+
+        ];
+    }
+
+    static function get_animations_list()
+    {
+        $animations = [
+
+            'fadeIn' => 'Fade In',
+            'fadeInDown' => 'Fade In Down',
+            'fadeInLeft' => 'Fade In Left',
+            'fadeInRight' => 'Fade In Right',
+            'fadeInUp' => 'Fade In Up',
+
+            'zoomIn' => 'Zoom In',
+            'zoomInDown' => 'Zoom In Down',
+            'zoomInLeft' => 'Zoom In Left',
+            'zoomInRight' => 'Zoom In Right',
+            'zoomInUp' => 'Zoom In Up',
+
+            'scaleIn' => 'Scale In',
+        ];
+
+        //add zoom out animations
+        $animations = array_merge(
+            $animations,
+            Helper::get_custom_animations_list()
+        );
+
+        //add the rest of the list
+        $animations = array_merge($animations, [
+            'slideInDown' => 'Slide In Down',
+            'slideInLeft' => 'Slide In Left',
+            'slideInRight' => 'Slide In Right',
+            'slideInUp' => 'Slide In Up',
+
+            'rotateIn' => 'Rotate In',
+            'rotateInDownLeft' => 'Rotate In Down Left',
+            'rotateInDownRight' => 'Rotate In Down Right',
+            'rotateInUpLeft' => 'Rotate In Up Left',
+            'rotateInUpRight' => 'Rotate In Up Right',
+
+
+        ]);
+        $new_animations = apply_filters('uicore_animations_list', []);
+        return array_merge($animations, $new_animations);
+    }
 }

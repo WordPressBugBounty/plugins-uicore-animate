@@ -1,66 +1,82 @@
-=== UiCore Animate - Free Elementor Animations, Transitions and interactions addon ===
+=== UiCore Animate - Free Animations, Transitions, and Interactions Addon for Elementor & Gutenberg ===
 Contributors: uicore
-Tags: elementor, animation, animate,
+Tags: elementor, gutenberg, blocks, animation, scroll animations
 Requires at least: 4.6
 Requires PHP: 7.4
-Tested up to: 6.6.1
-Stable tag: 1.0.11
+Tested up to: 6.7.0
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-With UiCore Animate, you can easily create engaging animations for your widgets without sacrificing time or quality.
-
+UiCore Animate brings engaging animations, dynamic transitions, and smooth interactions to Elementor and Gutenberg widgets, transforming your website into an interactive experience without sacrificing time or quality.
 
 == Description ==
 
-<strong>Unleash the Power of Animations in Elementor</strong>
+=== Unleash the Power of Animations in Elementor and Gutenberg ===
 
-With UiCore Animate, you can easily create engaging animations for your widgets without sacrificing time or quality.
+UiCore Animate is the ultimate tool for creating stunning animations in Elementor and Gutenberg, giving you the ability to easily add eye-catching effects, smooth transitions, and dynamic interactions to your WordPress site.
 
--Create Eye-catching Animations in Seconds (Animations Controller)
-Say goodbye to the hassle of manually adding animations to each widget – our plugin makes it as easy as selecting the widget and auto-applying the settings. You can even reset animations with just a few clicks.
+== Key Features of UiCore Animate ==
 
--Animate Multiple Widgets with Ease (Animations Controller)
-UiCore Animate makes it easy to animate multiple widgets at once. Select multiple widgets, rearrange them, and set delays between items to create a seamless and professional look.
+Quick & Easy Animations: Say goodbye to time-consuming manual animations. With UiCore Animate, you can effortlessly add animations to any widget in Elementor or Gutenberg in just a few clicks, saving you time and improving design quality.
 
--Choose from a Wide Range of Presets (Animations Styles)
-Replace Elementor’s default animations and choose the perfect one to fit your style. Whether you want your website to be playful and fun or sleek and professional, UiCore Animate has the perfect animations for you.
+Animate Multiple Widgets at Once: Apply animations to multiple widgets simultaneously, ensuring consistency and cohesion across your entire site.
 
--Enhance User Experience with Seamless Navigation (Smooth Scroll Feature)
-Take your website to the next level by incorporating UiCore Animate's smooth scroll feature. Elevate user engagement as visitors effortlessly glide through your content, enjoying a seamlessly navigable experience. Combine this intuitive navigation with our diverse animation presets for a website that not only looks stunning but also offers a captivating and smooth interaction.
+Scroll-Based Animations & Entrance Effects: Create captivating animations that trigger as elements come into view or during scrolling. Control the timing, style, and delay for a fully immersive user experience.
 
--Craft Elegant User Journeys (Page Transitions & Preloaders)
-Elevate user experience effortlessly using smooth and polished page transitions that maintain a consistent and professional look. Choose from various styles, implement globally, and customize speeds for a delightful and user-friendly browsing journey. With UiCore Animate, make every click a visually pleasing experience.
+Wide Range of Animation Presets: Choose from a diverse set of animation presets to replace default animations in Elementor and Gutenberg. Whether you prefer playful or sleek effects, UiCore Animate has the perfect option for you.
 
--Extend Widgets witch creative effects
-The features include a fluid gradient background, floating effects, animations that stick and reveal on scroll, as well as an animated border, among others.
+Smooth Scrolling Navigation: Enhance your site's user journey with smooth scroll capabilities, paired seamlessly with animations for a captivating browsing experience.
+
+Page Transitions & Preloaders: Craft engaging user journeys with polished page transitions and customizable preloaders, maintaining a consistent and professional look.
+
+Creative Effects: Extend your widgets with unique effects like fluid gradients, floating animations, sticky reveals on scroll, and animated borders, making your design truly stand out.
+
+== Boost Engagement & Improve User Experience ==
+
+UiCore Animate is designed to enhance the visual appeal of your website while improving user interaction. Whether you're building a portfolio, a business website, or a blog, this plugin is perfect for creating memorable experiences that keep visitors engaged.
+
 == Installation ==
 
-1. Install UiCore Animate either via the WordPress plugin directory or by uploading the files to your server at wp-content/plugins.
+Go to the WordPress plugin directory and search for "UiCore Animate."
+
+Click "Install Now" and then activate the plugin.
+
+Alternatively, upload the plugin files to your server at wp-content/plugins and activate from the WordPress dashboard.
 
 == Frequently Asked Questions ==
 
 = Does UiCore Animate affect my website performance? =
-
-Not at all. The plugin only replaces the CSS animations from Elementor so it has zero impact on performance.
+No. UiCore Animate enhances existing CSS animations, ensuring minimal impact on your website's performance.
 
 = Can I use UiCore Animate with any theme? =
-
-Yes, you can use it with any theme that supports Elementor Page Builder.
+Yes, UiCore Animate works with any theme that supports Elementor or Gutenberg.
 
 = Is this a standalone plugin? =
+No. UiCore Animate requires either Elementor or Gutenberg to function.
 
-No. You cannot use UiCore Animate without Elementor.
+= How do I apply animations to widgets? =
+Simply select the widget in Elementor or Gutenberg, go to the UiCore Animate settings, and choose your desired animation. You can adjust the timing, delay, and other settings as needed.
+
+= Can I use custom animations with UiCore Animate? =
+Yes, you can customize animations using the settings provided in the plugin. Additionally, you can combine built-in presets with your own CSS for even more unique effects.
+
+= Does UiCore Animate support responsive design? =
+Absolutely. UiCore Animate ensures that your animations look great on all devices, including desktops, tablets, and mobile phones.
+
+= How can I create scroll-based animations? =
+UiCore Animate allows you to trigger animations when elements come into view during scrolling. Simply select the scroll animation option and configure the settings to control when and how the animation is triggered.
+
+= Is UiCore Animate beginner-friendly? =
+Yes, UiCore Animate is designed to be easy to use, even for beginners. The interface is user-friendly, and no coding skills are required to create impressive animations.
 
 
 
-
-== Screenshots ==
-
-1. /assets/screenshots/1.png
 
 == Changelog ==
-
+= 2.0.0 =
+* NEW - Added support for Gutenberg Blocks
+* NEW - Added Scroll Based Animations
 = 1.0.11 =
 * FIX - Fixed Submenu bug where clicking would open the page, instead of the submenu, when some page transition animations were enabled.
 * FIX - Fixed Animated Borders bug that wasn't working with Advanced Post Grid and Container widgets.

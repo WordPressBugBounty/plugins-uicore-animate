@@ -16,6 +16,14 @@ class Assets
             add_action('wp_enqueue_scripts', [$this, 'register'], 5);
         }
         add_action('elementor/editor/after_enqueue_scripts', [$this, 'register'], 1);
+
+
+        add_action('elementor/editor/after_enqueue_scripts', [$this, 'register'], 1);
+
+        if (\class_exists('\UiCoreBlocks\Base')) {
+            // add inline script and styles to gutenberg editor
+            add_action('enqueue_block_assets', [$this, 'enqueue_block_assets']);
+        }
     }
 
     /**
@@ -34,8 +42,55 @@ class Assets
                 var uicore_animations_list = <?php echo wp_json_encode(\Elementor\Control_Animation::get_animations()); ?>;
                 var uicore_split_animations_list = <?php echo wp_json_encode(Helper::get_split_animations_list()); ?>;
             </script>
-<?php
+        <?php
         }
+    }
+
+
+    function enqueue_block_assets()
+    {
+        if (! is_admin()) {
+            return;
+        }
+
+        if (is_customize_preview()) {
+            return;
+        }
+        $list = Helper::get_animations_list();
+        $animations = [];
+        foreach ($list as $value => $label) {
+            $animations[] = [
+                'label' => $label,
+                'value' => $value
+            ];
+        }
+        $style = Settings::get_option('uianim_style');
+        if (is_array($style)) {
+            $style = $style['value'];
+        } else {
+            $style = 'style1';
+        }
+        wp_enqueue_style('uianim-style', UICORE_ANIMATE_ASSETS . '/css/' . $style . '.css');
+
+        \wp_enqueue_script('uicore_animate-editor');
+        \wp_add_inline_script('uicore_animate-editor', 'var uicore_animations_list = ' . wp_json_encode($animations) . ';');
+        ?>
+        <script>
+            var uicore_animations_list = <?php echo wp_json_encode($animations); ?>;
+        </script>
+        <style>
+            .uicore-animate-panel h2 button::after {
+                content: "UiCore";
+                font-size: 11px;
+                font-weight: 500;
+                background: #5dbad8;
+                color: black;
+                padding: 2px 5px;
+                border-radius: 3px;
+                margin-left: 8px;
+            }
+        </style>
+<?php
     }
 
     /**
@@ -80,7 +135,7 @@ class Assets
     public function get_scripts()
     {
         $prefix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-
+        $editor_data = require UICORE_ANIMATE_PATH . '/assets/build/editor.asset.php';
         $scripts = [
             'uicore_animate-vendor' => [
                 'src'       => UICORE_ANIMATE_ASSETS . '/js/vendor' . $prefix . '.js',
@@ -97,6 +152,12 @@ class Assets
                 'src'       => UICORE_ANIMATE_ASSETS . '/js/admin' . $prefix . '.js',
                 'deps'      => ['jquery', 'uicore_animate-vendor'],
                 'version'   => UICORE_ANIMATE_VERSION,
+                'in_footer' => true
+            ],
+            'uicore_animate-editor' => [
+                'src'       =>  UICORE_ANIMATE_ASSETS . '/build/editor.js',
+                'deps'      => $editor_data['dependencies'],
+                'version'   => $editor_data['version'],
                 'in_footer' => true
             ]
         ];
