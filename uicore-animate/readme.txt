@@ -4,7 +4,7 @@ Tags: elementor, gutenberg, blocks, animation, scroll animations
 Requires at least: 4.6
 Requires PHP: 7.4
 Tested up to: 6.7.0
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,12 @@ Click "Install Now" and then activate the plugin.
 
 Alternatively, upload the plugin files to your server at wp-content/plugins and activate from the WordPress dashboard.
 
+== How to add aniamtions to any gutenberg block ==
+[youtube https://www.youtube.com/watch?v=tMsAp68d530]
+
+== How to use Animate Controller in Elementor ==
+[youtube https://www.youtube.com/watch?v=L6UddkUrmk8]
+
 == Frequently Asked Questions ==
 
 = Does UiCore Animate affect my website performance? =
@@ -74,6 +80,9 @@ Yes, UiCore Animate is designed to be easy to use, even for beginners. The inter
 
 
 == Changelog ==
+= 2.0.1 =
+* FIX - Legacy animations not working (added support for older elementor animations)
+
 = 2.0.0 =
 * NEW - Added support for Gutenberg Blocks
 * NEW - Added Scroll Based Animations

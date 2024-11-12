@@ -268,8 +268,14 @@ class Elementor
             return;
         }
         //remove 'animation' control
-        $widget->remove_control('animation');
-        $widget->remove_responsive_control('_animation');
+        // check if controll with anme 'animation' exists
+        if ($widget->get_controls('animation')) {
+            $widget->remove_control('animation');
+            $name = 'animation';
+        } else {
+            $widget->remove_responsive_control('_animation');
+            $name = '_animation';
+        }
 
 
         // add select for Trigger type
@@ -288,17 +294,31 @@ class Elementor
             ]
         );
         //add the animation controller
-        $widget->add_responsive_control(
-            '_animation',
-            [
-                'label' => esc_html__('Entrance Animation', 'elementor'),
-                'type' => Controls_Manager::ANIMATION,
-                'frontend_available' => true,
-                'condition' => [
-                    'uicore_trigger_type' => '',
-                ],
-            ]
-        );
+        if ($name == 'animation') {
+            $widget->add_control(
+                'animation',
+                [
+                    'label' => esc_html__('Entrance Animation', 'elementor'),
+                    'type' => Controls_Manager::ANIMATION,
+                    'frontend_available' => true,
+                    'condition' => [
+                        'uicore_trigger_type' => '',
+                    ],
+                ]
+            );
+        } else {
+            $widget->add_responsive_control(
+                '_animation',
+                [
+                    'label' => esc_html__('Entrance Animation', 'elementor'),
+                    'type' => Controls_Manager::ANIMATION,
+                    'frontend_available' => true,
+                    'condition' => [
+                        'uicore_trigger_type' => '',
+                    ],
+                ]
+            );
+        }
         //add the scroll animation controller
         $widget->add_control(
             'uicore_scroll_animation',
@@ -677,7 +697,6 @@ class Elementor
             'uicore-icon-list'
         ];
         if (in_array($element->get_name(), $requires_bg_widgets)) {
-            error_log('condition met ' . $element->get_name());
             $element->add_control(
                 'uicore_animated_border_warning' . $suffix,
                 [
