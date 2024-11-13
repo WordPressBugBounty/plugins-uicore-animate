@@ -23,6 +23,7 @@ class Helper
             'fadeInUpAlt' => __('Fade In Up Alt', 'uicore-animate'),
             'fadeInUpAlt cut' => __('Fade In Up Alt Cut', 'uicore-animate'),
             'fadeIn' => __('Fade In', 'uicore-animate'),
+            'fadeIn blur' => __('Fade In Blur', 'uicore-animate'),
             'zoomIn' => __('Zoom In', 'uicore-animate'),
             'scaleIn' => __('Scale In', 'uicore-animate'),
             'rollIn' => __('Roll In', 'uicore-animate'),
@@ -36,7 +37,7 @@ class Helper
         return array_merge($animations, $new_animations);
     }
 
-    static function get_custom_animations_list()
+    static function get_zoom_out_animations_list()
     {
         return [
             'zoomOut' => 'Zoom Out',
@@ -44,7 +45,16 @@ class Helper
             'zoomOutLeft' => 'Zoom Out Left',
             'zoomOutRight' => 'Zoom Out Right',
             'zoomOutUp' => 'Zoom Out Up',
-
+        ];
+    }
+    static function get_blur_animations_list()
+    {
+        return [
+            'fadeIn blur' => 'Fade In Blur',
+            'fadeInUp blur' => 'Fade In Up Blur',
+            'fadeInLeft blur' => 'Fade In Left Blur',
+            'fadeInRight blur' => 'Fade In Right Blur',
+            'fadeInDown blur' => 'Fade In Down Blur',
         ];
     }
 
@@ -70,7 +80,7 @@ class Helper
         //add zoom out animations
         $animations = array_merge(
             $animations,
-            Helper::get_custom_animations_list()
+            Helper::get_zoom_out_animations_list()
         );
 
         //add the rest of the list
@@ -85,9 +95,13 @@ class Helper
             'rotateInDownRight' => 'Rotate In Down Right',
             'rotateInUpLeft' => 'Rotate In Up Left',
             'rotateInUpRight' => 'Rotate In Up Right',
-
-
         ]);
+
+        //add blur animations
+        $animations = array_merge(
+            $animations,
+            Helper::get_blur_animations_list()
+        );
         $new_animations = apply_filters('uicore_animations_list', []);
         return array_merge($animations, $new_animations);
     }

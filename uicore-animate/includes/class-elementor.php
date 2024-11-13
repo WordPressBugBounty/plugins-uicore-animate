@@ -64,7 +64,8 @@ class Elementor
     public static function new_animations($animations)
     {
         $new_animations = [
-            'ZoomOut' => Helper::get_custom_animations_list()
+            'ZoomOut' => Helper::get_zoom_out_animations_list(),
+            'Blur' => Helper::get_blur_animations_list()
         ];
         return \array_merge($animations, $new_animations);
     }

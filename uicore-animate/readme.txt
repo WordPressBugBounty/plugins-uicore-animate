@@ -4,7 +4,7 @@ Tags: elementor, gutenberg, blocks, animation, scroll animations
 Requires at least: 4.6
 Requires PHP: 7.4
 Tested up to: 6.7.0
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,11 @@ Yes, UiCore Animate is designed to be easy to use, even for beginners. The inter
 
 
 == Changelog ==
+
+= 2.0.2 =
+* FIX - Elementor On Scroll Effects script missing
+* NEW - Added 5 New Blur Animations
+
 = 2.0.1 =
 * FIX - Legacy animations not working (added support for older elementor animations)
 
