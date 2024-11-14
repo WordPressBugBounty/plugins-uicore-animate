@@ -60,7 +60,7 @@ class Frontend
      * Enqueue scroll
      *
      */
-    public function scroll()
+    public function enqueue_scripts()
     {
         //scroll
         if (Settings::get_option('uianim_scroll')  == 'true') {
