@@ -23,7 +23,7 @@ class Frontend
         if (!\class_exists('\UiCore\Helper')) {
             $style = Settings::get_option('uianim_style');
             if (is_array($style)) {
-                $this->style = $style['value'];
+                $this->style = $style['value'] ? $style['value'] : 'style1'; //fallback for default style
             } else {
                 $this->style = 'style1';
             }
@@ -77,12 +77,8 @@ class Frontend
     {
         if ($settings['performance_animations'] === 'true') {
             $style = $settings['uianim_style'];
-            $style = isset($style['value']) ? $style['value'] : 'style1';
+            $style = (isset($style['value']) && $style['value']) ? $style['value'] : 'style1';  //fallback for default style
             $files[] = UICORE_ANIMATE_PATH . '/assets/css/' . $style . '.css';
-
-            // if ($settings['performance_ugly_animations'] === 'false') {
-            //     $files[] =  UICORE_ANIMATE_PATH . '/assets/css/global.css';
-            // }
         }
 
         return $files;

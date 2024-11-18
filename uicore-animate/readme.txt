@@ -4,11 +4,11 @@ Tags: elementor, gutenberg, blocks, animation, scroll animations
 Requires at least: 4.6
 Requires PHP: 7.4
 Tested up to: 6.7.0
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-UiCore Animate brings engaging animations, dynamic transitions, and smooth interactions to Elementor and Gutenberg blocks, transforming your website into an interactive experience.
+UiCore Animate adds page transitions, smooth scroll, and engaging animations to Elementor and Gutenberg blocks, for smoother, engaging experiences.
 
 == Description ==
 
@@ -80,6 +80,9 @@ Yes, UiCore Animate is designed to be easy to use, even for beginners. The inter
 
 
 == Changelog ==
+
+= 2.0.4 =
+* UPD - Default animations fallback
 = 2.0.3 =
 * FIX - Missing scripts when not used with UiCore Framework
 = 2.0.2 =
