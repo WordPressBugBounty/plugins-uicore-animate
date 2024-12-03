@@ -36,7 +36,6 @@ class Elementor
             add_action('elementor/element/before_section_end', [$this, 'animated_border'], 10, 2);
             add_action('elementor/element/container/section_border/before_section_end', [$this, 'animated_border_in_elements'], 10, 2);
             add_action('elementor/element/uicore-advanced-post-grid/section_style_item/before_section_end', [$this, 'animated_border_in_elements'], 10, 2);
-            // add_action('elementor/element/uicore-advanced-post-carousel/section_style_item/before_section_end', [$this, 'animated_border_in_elements'], 10, 2);
             add_action('elementor/element/uicore-icon-list/section_list_items/before_section_end', [$this, 'animated_border_in_elements'], 10, 2);
 
 
