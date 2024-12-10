@@ -3,7 +3,7 @@
 Plugin Name: UiCore Animate
 Plugin URI: https://animate.uicore.co
 Description: Animate your design in just a few clicks.
-Version: 2.0.5
+Version: 2.0.6
 Author: UiCore
 Author URI: https://uicore.co
 License: GPL3
@@ -31,7 +31,7 @@ final class Base
      *
      * @var string
      */
-    public $version = '2.0.5';
+    public $version = '2.0.6';
 
     /**
      * Holds various class instances
@@ -125,10 +125,8 @@ final class Base
      */
     public function init_plugin()
     {
-        if (\class_exists('Elementor\Plugin')) {
-            $this->includes();
-            $this->init_hooks();
-        }
+        $this->includes();
+        $this->init_hooks();
     }
 
     /**
@@ -163,11 +161,19 @@ final class Base
     public function includes()
     {
 
+        //generic
         require_once UICORE_ANIMATE_INCLUDES . '/class-helper.php';
         require_once UICORE_ANIMATE_INCLUDES . '/class-settings.php';
         require_once UICORE_ANIMATE_INCLUDES . '/class-assets.php';
-        require_once UICORE_ANIMATE_INCLUDES . '/class-elementor.php';
+
+        if (\class_exists('Elementor\Plugin')) {
+            require_once UICORE_ANIMATE_INCLUDES . '/class-elementor.php';
+        }
+
+        //page transition
         require_once UICORE_ANIMATE_INCLUDES . '/class-page-transition.php';
+
+        //rest api
         require_once UICORE_ANIMATE_INCLUDES . '/class-rest-api.php';
 
         if ($this->is_request('admin')) {
@@ -223,8 +229,6 @@ final class Base
     public function init_classes()
     {
 
-        new REST_API();
-        new Elementor();
         if ($this->is_request('admin')) {
             $this->container['admin'] = new Admin();
         }
@@ -233,6 +237,11 @@ final class Base
             $this->container['frontend'] = new Frontend();
         }
 
+        if (\class_exists('Elementor\Plugin')) {
+            $this->container['elementor'] = new Elementor();
+        }
+
+        $this->container['rest'] = new REST_API();
         $this->container['assets'] = new Assets();
     }
 

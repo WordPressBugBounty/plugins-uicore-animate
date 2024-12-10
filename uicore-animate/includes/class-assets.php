@@ -15,15 +15,9 @@ class Assets
         } else {
             add_action('wp_enqueue_scripts', [$this, 'register'], 5);
         }
-        add_action('elementor/editor/after_enqueue_scripts', [$this, 'register'], 1);
-
 
         add_action('elementor/editor/after_enqueue_scripts', [$this, 'register'], 1);
-
-        if (\class_exists('\UiCoreBlocks\Base')) {
-            // add inline script and styles to gutenberg editor
-            add_action('enqueue_block_assets', [$this, 'enqueue_block_assets']);
-        }
+        add_action('elementor/editor/after_enqueue_scripts', [$this, 'register'], 1);
     }
 
     /**
@@ -35,63 +29,20 @@ class Assets
     {
         $this->register_scripts($this->get_scripts());
         $this->register_styles($this->get_styles());
+
         //add animations if is elementor editor
-        if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
+        if (\class_exists('\Elementor\Plugin') && \Elementor\Plugin::$instance->editor->is_edit_mode()) {
 ?>
             <script>
                 var uicore_animations_list = <?php echo wp_json_encode(\Elementor\Control_Animation::get_animations()); ?>;
                 var uicore_split_animations_list = <?php echo wp_json_encode(Helper::get_split_animations_list()); ?>;
             </script>
-        <?php
-        }
-    }
-
-
-    function enqueue_block_assets()
-    {
-        if (! is_admin()) {
-            return;
-        }
-
-        if (is_customize_preview()) {
-            return;
-        }
-        $list = Helper::get_animations_list();
-        $animations = [];
-        foreach ($list as $value => $label) {
-            $animations[] = [
-                'label' => $label,
-                'value' => $value
-            ];
-        }
-        $style = Settings::get_option('uianim_style');
-        if (is_array($style)) {
-            $style = $style['value'];
-        } else {
-            $style = 'style1';
-        }
-        wp_enqueue_style('uianim-style', UICORE_ANIMATE_ASSETS . '/css/' . $style . '.css');
-
-        \wp_enqueue_script('uicore_animate-editor');
-        \wp_add_inline_script('uicore_animate-editor', 'var uicore_animations_list = ' . wp_json_encode($animations) . ';');
-        ?>
-        <script>
-            var uicore_animations_list = <?php echo wp_json_encode($animations); ?>;
-        </script>
-        <style>
-            .uicore-animate-panel h2 button::after {
-                content: "UiCore";
-                font-size: 11px;
-                font-weight: 500;
-                background: #5dbad8;
-                color: black;
-                padding: 2px 5px;
-                border-radius: 3px;
-                margin-left: 8px;
-            }
-        </style>
 <?php
+        }
     }
+
+
+
 
     /**
      * Register scripts
