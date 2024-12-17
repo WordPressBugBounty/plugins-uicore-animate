@@ -349,7 +349,7 @@ class Elementor
                     'size' => 10,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}}' => '--ui-anim-start: {{SIZE}}vh',
+                    '{{WRAPPER}}' => 'animation-range:entry {{uicore_scroll_offset_end.SIZE}}vh entry {{SIZE}}vh',
                 ],
                 'condition' => [
                     'uicore_trigger_type' => 'uicore-animate-scroll',
@@ -374,7 +374,7 @@ class Elementor
                     'size' => 50,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}}' => '--ui-anim-end: {{SIZE}}vh',
+                    '{{WRAPPER}}' => 'animation-range:entry {{uicore_scroll_offset_start.SIZE}}vh entry {{SIZE}}vh',
                 ],
                 'condition' => [
                     'uicore_trigger_type' => 'uicore-animate-scroll',
@@ -628,15 +628,19 @@ class Elementor
             'ui-borderanim-rotate' . $suffix . ' ui-multicolor-12' => __('Multicolor Rotate (12)', 'uicore-animate'),
         ];
 
+
+        // $condition = [
+        //     'relation' => 'or',
+        //     'terms' => [
+        //         [
+        //             'name' => '_border_border',
+        //             'operator' => '!in',
+        //             'value' => ['none', '']
+        //         ]
+        //     ]
+        // ];
         $condition = [
-            'relation' => 'or',
-            'terms' => [
-                [
-                    'name' => '_border_border',
-                    'operator' => '!in',
-                    'value' => ['none', '']
-                ]
-            ]
+            '_border_border!' => ''
         ];
         if ($is_container) {
             $condition = [
@@ -648,6 +652,9 @@ class Elementor
                     ]
                 ]
             ];
+            $condition = [
+                'border_border!' => ''
+            ];
         } elseif ($element->get_name() == 'uicore-advanced-post-grid' || $element->get_name() == 'uicore-advanced-post-carousel') {
             $condition = [
                 "terms" => [
@@ -657,6 +664,9 @@ class Elementor
                         'value' => ['none', '']
                     ]
                 ]
+            ];
+            $condition = [
+                'item_border_border!' => ''
             ];
         } elseif ($element->get_name() == 'uicore-icon-list') {
             $condition = [
@@ -668,16 +678,11 @@ class Elementor
                     ]
                 ]
             ];
+            $condition = [
+                'list_item_border_border!' => ''
+            ];
         }
 
-        //raw html with description
-        // $element->add_control(
-        //     'uicore_notice' . $suffix,
-        //     [
-        //         'type' => \Elementor\Controls_Manager::RAW_HTML,
-        //         'raw' => $suffix . ' - ' . $element->get_name() . '<div class="elementor-panel-alert elementor-panel-alert-warning"> ' . print_r($condition, true) . '</div>',
-        //     ]
-        // );
 
         $element->add_control(
             'uicore_animated_border' . $suffix,
@@ -687,7 +692,7 @@ class Elementor
                 'options' => $options,
                 'prefix_class' => '',
                 'default' => '',
-                'conditions' =>  $condition,
+                'condition' =>  $condition,
             ]
         );
 

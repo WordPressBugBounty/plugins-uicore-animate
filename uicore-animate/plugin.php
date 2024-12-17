@@ -3,14 +3,14 @@
 Plugin Name: UiCore Animate
 Plugin URI: https://animate.uicore.co
 Description: Animate your design in just a few clicks.
-Version: 2.0.6
+Version: 2.1.0
 Author: UiCore
 Author URI: https://uicore.co
 License: GPL3
 Text Domain: uicore-animate
 Domain Path: /languages
  * Elementor requires at least: 3.8.0
- * Elementor tested up to: 3.25.4
+ * Elementor tested up to: 3.26.0
 */
 
 namespace UiCoreAnimate;
@@ -31,7 +31,7 @@ final class Base
      *
      * @var string
      */
-    public $version = '2.0.6';
+    public $version = '2.1.0';
 
     /**
      * Holds various class instances
@@ -197,28 +197,6 @@ final class Base
 
         // Localize our plugin
         add_action('init', array($this, 'localization_setup'));
-
-        // Disables elementor experiment optimized control loading
-        add_filter('elementor/experiments/default-features-registered', function ($manager) {
-
-            // Check if the object is an instance of the Manager class
-            if ($manager instanceof \Elementor\Core\Experiments\Manager) {
-
-                // Get the private property 'features' using reflection
-                $reflection = new \ReflectionClass($manager);
-                $property = $reflection->getProperty('features');
-                $property->setAccessible(true);
-                $features = $property->getValue($manager);
-
-                // Set the state of the desired experiment
-                if (isset($features['e_optimized_control_loading'])) {
-                    $features['e_optimized_control_loading']['state'] = 'inactive';
-                    $property->setValue($manager, $features);
-                }
-            }
-
-            return $manager;
-        });
     }
 
     /**

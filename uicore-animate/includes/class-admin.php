@@ -181,7 +181,12 @@ class Admin
         <script>
             var uicore_animations_list = <?php echo wp_json_encode($animations); ?>;
         </script>
-        <style>
+        <style id="uicore-animate-editor">
+            .uicore-animate-scroll {
+                animation-timeline: view(block);
+                animation: 0ms linear uicoreFadeIn both;
+            }
+
             .uicore-animate-panel h2 button::after {
                 content: "UiCore";
                 font-size: 11px;

@@ -4,7 +4,7 @@ Tags: elementor, gutenberg, blocks, animation, scroll animations
 Requires at least: 4.6
 Requires PHP: 7.4
 Tested up to: 6.7.0
-Stable tag: 2.0.6
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,9 @@ Yes, UiCore Animate is designed to be easy to use, even for beginners. The inter
 
 
 == Changelog ==
+= 2.1.0 =
+* UPD - Added Scroll based animation js fallback for browsers that does not suport css animation timeline
+* FIX - Elementor Optimized Control loading bugs
 = 2.0.6 =
 * FIX - Gutenberg Blocks Animations fix for 3rd party blocks
 = 2.0.5 =

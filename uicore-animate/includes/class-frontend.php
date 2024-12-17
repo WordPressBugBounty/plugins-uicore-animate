@@ -44,6 +44,8 @@ class Frontend
             add_filter('uicore_css_global_files', [$this, 'add_css_to_framework'], 10, 2);
             add_filter('uicore_js_global_files', [$this, 'add_js_to_framework'], 10, 2);
         }
+
+        \add_action('wp_footer', [$this, 'add_scroll_timeline_polyfill'], 999);
     }
 
     /**
@@ -66,9 +68,7 @@ class Frontend
         if (Settings::get_option('uianim_scroll')  == 'true') {
             wp_enqueue_script('uianim-scroll', UICORE_ANIMATE_ASSETS . '/js/scroll.js',  UICORE_ANIMATE_VERSION, true);
         }
-        if (\class_exists('\UiCoreBlocks\Base')) {
-            wp_enqueue_script('uianim-entrance-animation', UICORE_ANIMATE_ASSETS . '/js/entrance-animation.js',  UICORE_ANIMATE_VERSION, true);
-        }
+        wp_enqueue_script('uianim-entrance-animation', UICORE_ANIMATE_ASSETS . '/js/entrance-animation.js',  UICORE_ANIMATE_VERSION, true);
     }
 
 
@@ -89,10 +89,32 @@ class Frontend
         if ($settings['performance_animations'] === 'true' && $settings['uianim_scroll'] == 'true') {
             $files[] =  UICORE_ANIMATE_PATH . '/assets/js/scroll.js';
         }
-        if (\class_exists('\UiCoreBlocks\Base')) {
-            $files[] =  UICORE_ANIMATE_PATH . '/assets/js/entrance-animation.js';
-        }
+
+        $files[] =  UICORE_ANIMATE_PATH . '/assets/js/entrance-animation.js';
 
         return $files;
+    }
+
+    public function add_scroll_timeline_polyfill()
+    { ?>
+        <style>
+            .uicore-animate-scroll {
+                animation: .5s linear uicoreFadeIn both;
+                animation-timeline: view(block);
+            }
+        </style>
+        <script>
+            (function() {
+                const supportsAnimationTimeline = CSS.supports("animation-timeline", "scroll()");
+
+                if (!supportsAnimationTimeline) {
+                    const script = document.createElement('script');
+                    script.src = "https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js";
+                    script.async = true;
+                    document.head.appendChild(script);
+                }
+            })();
+        </script>
+<?php
     }
 }
