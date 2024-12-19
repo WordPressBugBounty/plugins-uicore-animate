@@ -3,7 +3,7 @@
 Plugin Name: UiCore Animate
 Plugin URI: https://animate.uicore.co
 Description: Animate your design in just a few clicks.
-Version: 2.1.0
+Version: 2.1.1
 Author: UiCore
 Author URI: https://uicore.co
 License: GPL3
@@ -31,7 +31,7 @@ final class Base
      *
      * @var string
      */
-    public $version = '2.1.0';
+    public $version = '2.1.1';
 
     /**
      * Holds various class instances

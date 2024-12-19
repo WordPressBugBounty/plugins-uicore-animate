@@ -152,13 +152,20 @@ class Admin
 
     function enqueue_block_assets()
     {
-        if (! is_admin()) {
+        if (!is_admin()) {
             return;
         }
 
         if (is_customize_preview()) {
             return;
         }
+
+        //return if is editing widgets (wp-admin/widgets.php)
+        if (\get_current_screen()->id == 'widgets') {
+            return;
+        }
+
+
         $list = Helper::get_animations_list();
         $animations = [];
         foreach ($list as $value => $label) {
