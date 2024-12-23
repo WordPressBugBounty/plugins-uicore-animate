@@ -34,7 +34,12 @@ class Frontend
                     wp_dequeue_style('e-animations');
                 }, 20);
 
-                add_action('wp_enqueue_scripts', [$this, 'animation_style'], 60);
+                add_action('wp_enqueue_scripts', [$this, 'remove_elementor_animation_style'], 60);
+
+                // Defer the loading to footer by adding inline style in the footer
+                add_action('get_footer', function () {
+                    wp_enqueue_style('uianim-style', UICORE_ANIMATE_ASSETS . '/css/' . $this->style . '.css');
+                }, 1000);
             }
 
             //scroll
@@ -52,10 +57,9 @@ class Frontend
      * Enqueue animation style
      *
      */
-    public function animation_style()
+    public function remove_elementor_animation_style()
     {
         wp_dequeue_style('elementor-animations');
-        wp_enqueue_style('uianim-style', UICORE_ANIMATE_ASSETS . '/css/' . $this->style . '.css');
     }
 
     /**

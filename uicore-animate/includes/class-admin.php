@@ -181,17 +181,10 @@ class Admin
             $style = 'style1';
         }
         wp_enqueue_style('uianim-style', UICORE_ANIMATE_ASSETS . '/css/' . $style . '.css');
-
-        \wp_enqueue_script('uicore_animate-editor');
-        \wp_add_inline_script('uicore_animate-editor', 'var uicore_animations_list = ' . wp_json_encode($animations) . ';');
-?>
-        <script>
-            var uicore_animations_list = <?php echo wp_json_encode($animations); ?>;
-        </script>
-        <style id="uicore-animate-editor">
-            .uicore-animate-scroll {
+        \wp_add_inline_style('uianim-style', '
+         .uicore-animate-scroll {
+                animation: .5s linear uicoreFadeIn both;
                 animation-timeline: view(block);
-                animation: 0ms linear uicoreFadeIn both;
             }
 
             .uicore-animate-panel h2 button::after {
@@ -204,7 +197,14 @@ class Admin
                 border-radius: 3px;
                 margin-left: 8px;
             }
-        </style>
+        ');
+
+        \wp_enqueue_script('uicore_animate-editor');
+        \wp_add_inline_script('uicore_animate-editor', 'var uicore_animations_list = ' . wp_json_encode($animations) . ';');
+?>
+        <script>
+            var uicore_animations_list = <?php echo wp_json_encode($animations); ?>;
+        </script>
 <?php
     }
 }
