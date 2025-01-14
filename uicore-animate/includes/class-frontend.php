@@ -111,7 +111,7 @@ class Frontend
             (function() {
                 const supportsAnimationTimeline = CSS.supports("animation-timeline", "scroll()");
 
-                if (!supportsAnimationTimeline) {
+                if (!supportsAnimationTimeline && document.querySelector('.uicore-animate-scroll')) {
                     const script = document.createElement('script');
                     script.src = "https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js";
                     script.async = true;
