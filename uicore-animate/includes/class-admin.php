@@ -42,7 +42,7 @@ class Admin
         }
 
         //Connect handle
-        add_submenu_page(null, 'UiCore Connect', 'UiCore Connect', 'manage_options', 'uicore_connect_free', [$this, 'connect_page_callback']);
+        // add_submenu_page(null, 'UiCore Connect', 'UiCore Connect', 'manage_options', 'uicore_connect_free', [$this, 'connect_page_callback']);
     }
 
     /**

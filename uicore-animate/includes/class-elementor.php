@@ -52,6 +52,10 @@ class Elementor
             add_action('elementor/frontend/container/before_render', [$this, 'should_script_enqueue']);
             add_action('elementor/frontend/widget/before_render', [$this, 'should_script_enqueue']);
             add_action('elementor/preview/enqueue_scripts', [$this, 'enqueue_scripts']);
+            //register the scripts
+            add_action('wp_enqueue_scripts', function () {
+                $this->enqueue_scripts(null, false);
+            });
         }
     }
 
@@ -205,7 +209,7 @@ class Elementor
     }
 
 
-    public function enqueue_scripts($type)
+    public function enqueue_scripts($name = null, $enqueue = true)
     {
         $list = [
             'split' => [
@@ -225,24 +229,33 @@ class Elementor
                 'style'     => false,
             ]
         ];
-        if ($type) {
-            $list = [$type => $list[$type]];
+        if ($name) {
+            $list = [$name => $list[$name]];
         }
         foreach ($list as $type => $data) {
+
             if ($data['script']) {
-                wp_enqueue_script('ui-e-' . $type, UICORE_ANIMATE_URL . '/assets/js/' . $type . '.js', ['jquery'], UICORE_ANIMATE_VERSION, true);
+
+                if ($enqueue) {
+                    // $widget->add_script_depends('ui-e-' . $type);
+                    wp_enqueue_script('ui-e-' . $type);
+                } else {
+                    \wp_register_script('ui-e-' . $type, UICORE_ANIMATE_URL . '/assets/js/' . $type . '.js', ['jquery'], UICORE_ANIMATE_VERSION, true);
+                }
             }
             if ($data['style']) {
-                wp_enqueue_style('ui-e-' . $type, UICORE_ANIMATE_URL . '/assets/css/' . $type . '.css', [], UICORE_ANIMATE_VERSION,);
+
+                if ($enqueue) {
+                    wp_enqueue_style('ui-e-' . $type);
+                } else {
+                    \wp_register_style('ui-e-' . $type, UICORE_ANIMATE_URL . '/assets/css/' . $type . '.css', [], UICORE_ANIMATE_VERSION);
+                }
             }
         }
     }
 
-    public function should_script_enqueue(\Elementor\Controls_Stack $widget)
+    public function should_script_enqueue($widget)
     {
-
-        // TODO: if cache experiment is enabled, we can't get control settings for display
-        //if (Plugin::$instance->experiments->is_feature_active('e_element_cache')) {}
 
         if ('ui-split-animate' === $widget->get_settings_for_display('ui_animate_split')) {
             $this->enqueue_scripts('split');
