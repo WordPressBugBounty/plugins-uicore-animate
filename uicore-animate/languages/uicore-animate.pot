@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-07 12:39+0000\n"
+"POT-Creation-Date: 2025-03-28 11:20+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -60,7 +60,7 @@ msgid "Trigger Type"
 msgstr ""
 
 #: ../includes/class-elementor.php:301
-msgid "Enrance"
+msgid "Entrance"
 msgstr ""
 
 #: ../includes/class-elementor.php:302
@@ -107,7 +107,7 @@ msgstr ""
 msgid "Enable Fluid Gradient background."
 msgstr ""
 
-#: ../includes/class-elementor.php:473, ../includes/class-elementor.php:634, ../includes/class-elementor.php:825, ../includes/class-page-transition.php:530
+#: ../includes/class-elementor.php:473, ../includes/class-elementor.php:634, ../includes/class-elementor.php:825, ../includes/class-page-transition.php:551
 msgid "None"
 msgstr ""
 
@@ -359,94 +359,94 @@ msgstr ""
 msgid "Zoom Out Up"
 msgstr ""
 
-#: ../includes/class-page-transition.php:532
+#: ../includes/class-page-transition.php:553
 msgid "Blobs Spinner"
 msgstr ""
 
-#: ../includes/class-page-transition.php:533
+#: ../includes/class-page-transition.php:554
 msgid "Blobs Spinner & Text"
 msgstr ""
 
-#: ../includes/class-page-transition.php:534
+#: ../includes/class-page-transition.php:555
 msgid "Box"
 msgstr ""
 
-#: ../includes/class-page-transition.php:535
+#: ../includes/class-page-transition.php:556
 msgid "Box & Text"
 msgstr ""
 
-#: ../includes/class-page-transition.php:536
+#: ../includes/class-page-transition.php:557
 msgid "Glowing Spinner"
 msgstr ""
 
-#: ../includes/class-page-transition.php:537
+#: ../includes/class-page-transition.php:558
 msgid "Glowing Spinner & Text"
 msgstr ""
 
-#: ../includes/class-page-transition.php:538
+#: ../includes/class-page-transition.php:559
 msgid "Infinity"
 msgstr ""
 
-#: ../includes/class-page-transition.php:539
+#: ../includes/class-page-transition.php:560
 msgid "Infinity & Text"
 msgstr ""
 
-#: ../includes/class-page-transition.php:540
+#: ../includes/class-page-transition.php:561
 msgid "Lines"
 msgstr ""
 
-#: ../includes/class-page-transition.php:541
+#: ../includes/class-page-transition.php:562
 msgid "Lines & Text"
 msgstr ""
 
-#: ../includes/class-page-transition.php:542
+#: ../includes/class-page-transition.php:563
 msgid "Liquid Box Spinner"
 msgstr ""
 
-#: ../includes/class-page-transition.php:543
+#: ../includes/class-page-transition.php:564
 msgid "Liquid Box Spinner & Text"
 msgstr ""
 
-#: ../includes/class-page-transition.php:544
+#: ../includes/class-page-transition.php:565
 msgid "Simple Spinner"
 msgstr ""
 
-#: ../includes/class-page-transition.php:545
+#: ../includes/class-page-transition.php:566
 msgid "Simple Spinner & Text"
 msgstr ""
 
-#: ../includes/class-page-transition.php:546
+#: ../includes/class-page-transition.php:567
 msgid "Circle Spinner"
 msgstr ""
 
-#: ../includes/class-page-transition.php:547
+#: ../includes/class-page-transition.php:568
 msgid "Circle Spinner & Text"
 msgstr ""
 
-#: ../includes/class-page-transition.php:548
+#: ../includes/class-page-transition.php:569
 msgid "Triangle"
 msgstr ""
 
-#: ../includes/class-page-transition.php:549
+#: ../includes/class-page-transition.php:570
 msgid "Triangle & Text"
 msgstr ""
 
-#: ../includes/class-page-transition.php:550
+#: ../includes/class-page-transition.php:571
 msgid "Unfold Spinner"
 msgstr ""
 
-#: ../includes/class-page-transition.php:551
+#: ../includes/class-page-transition.php:572
 msgid "Unfold Spinner & Text"
 msgstr ""
 
-#: ../includes/class-page-transition.php:553
+#: ../includes/class-page-transition.php:574
 msgid "Simple Counter"
 msgstr ""
 
-#: ../includes/class-page-transition.php:554
+#: ../includes/class-page-transition.php:575
 msgid "Big Counter"
 msgstr ""
 
-#: ../includes/class-page-transition.php:556
+#: ../includes/class-page-transition.php:577
 msgid "Intro Words"
 msgstr ""

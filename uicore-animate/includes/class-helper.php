@@ -105,4 +105,38 @@ class Helper
         $new_animations = apply_filters('uicore_animations_list', []);
         return array_merge($animations, $new_animations);
     }
+
+     /**
+     * Check if we're on Elementor Edit or Preview mode.
+     *
+     * @param bool $server_method - If true, checks for elementor URI request parameters instead of using elementor API.
+     *
+     * @return bool
+     */
+    static function is_edit_mode( $server_method = false ) {
+
+        // Cases where Elementor instance is not available
+        if($server_method){
+            if (
+                strpos($_SERVER['REQUEST_URI'], 'elementor') !== false ||
+                (
+                    strpos($_SERVER['REQUEST_URI'], 'preview') !== false &&
+                    strpos($_SERVER['REQUEST_URI'], 'preview_id') !== false &&
+                    strpos($_SERVER['REQUEST_URI'], 'preview_nonce') !== false
+                )
+            ) {
+                return true;
+            }
+
+            return false;
+        }
+
+        // Default elementor method
+        $elementor_instance = \Elementor\Plugin::instance();
+        if ( $elementor_instance->preview->is_preview_mode() || $elementor_instance->editor->is_edit_mode() ) {
+            return true;
+        }
+
+        return false;
+    }
 }

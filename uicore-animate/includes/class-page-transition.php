@@ -43,10 +43,16 @@ class PageTransition
 
         //continue only if the animations are enabled
         if ($this->animation != 'none') {
+
+            if (Helper::is_edit_mode(true)) {
+                return;
+            }
+
             if (!\class_exists('\UiCore\Core')) {
                 $this->body_selector = 'body';
                 add_action('wp_head', [$this, 'add_page_transition_style'], 90);
             } else {
+                // TODO: in here we should return if animations in `Performance` tab OR `Animations` tab, on Framework, are disable
                 add_filter('uicore_css_global_code', [$this, 'add_css_to_framework'], 10, 2);
             }
 
@@ -84,6 +90,10 @@ class PageTransition
      */
     function add_page_transition_script()
     {
+        if ( Helper::is_edit_mode(true) ) {
+            return;
+        }
+
         $js = $pre_js = null;
 
         //Page Transition js
@@ -195,8 +205,20 @@ class PageTransition
 
     function generate_css($class)
     {
-        //chck if $class is an instance of CSS
+
+        //check if $class is an instance of CSS
         if (($class instanceof \UiCore\CSS)) {
+
+            // TODO: remove both property checks after Framework updates
+            // UiCore\CSS $global_animations from private to public
+            if (
+                property_exists($class, 'global_animations') &&
+                isset($class->global_animations) &&
+                ! $class->global_animations
+            ) {
+                return;
+            }
+
             $background = $class->color(Settings::get_option('animations_page_color'));
         } else {
             $background = self::get_color(Settings::get_option('animations_page_color'));
@@ -490,8 +512,7 @@ class PageTransition
         }
 
         echo $this->get_preloader_html($this->preloader);
-?>
-
+        ?>
         <script>
             const uiAnimPreloader = document.querySelector('.ui-anim-preloader');
 
@@ -516,7 +537,7 @@ class PageTransition
                 window.addEventListener('beforeunload', () => uiAnimateTogglePreloader(true));
             }
         </script>
-    <?php
+        <?php
     }
 
     /**
@@ -572,7 +593,7 @@ class PageTransition
         if (\class_exists('\UiCore\Settings')) {
             $color = \UiCore\Settings::color_filter($color);
         }
-    ?>
+        ?>
         <style>
             .ui-anim-preloader {
                 --ui-e-anim-preloader-color: <?php echo $color; ?>;
@@ -646,7 +667,7 @@ class PageTransition
                 <?php } ?>
             </div>
 
-<?php
+        <?php
         } elseif ($this->preloader === 'intro-words') {
             include 'preloaders/intro-words.php';
         } else {

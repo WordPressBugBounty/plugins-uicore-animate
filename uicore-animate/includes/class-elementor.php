@@ -298,7 +298,7 @@ class Elementor
                 'label' => UICORE_ANIMATE_BADGE . __('Trigger Type', 'uicore-animate'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => __('Enrance', 'uicore-animate'),
+                    '' => __('Entrance', 'uicore-animate'),
                     'uicore-animate-scroll' => __('Scroll', 'uicore-animate'),
                 ],
                 'default' => '',
