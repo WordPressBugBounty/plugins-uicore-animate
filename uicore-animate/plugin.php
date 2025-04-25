@@ -3,14 +3,14 @@
 Plugin Name: UiCore Animate
 Plugin URI: https://animate.uicore.co
 Description: Animate your design in just a few clicks.
-Version: 2.1.5
+Version: 2.1.6
 Author: UiCore
 Author URI: https://uicore.co
 License: GPL3
 Text Domain: uicore-animate
 Domain Path: /languages
  * Elementor requires at least: 3.8.0
- * Elementor tested up to: 3.28.1
+ * Elementor tested up to: 3.28.4
 */
 
 namespace UiCoreAnimate;
@@ -31,7 +31,7 @@ final class Base
      *
      * @var string
      */
-    public $version = '2.1.5';
+    public $version = '2.1.6';
 
     /**
      * Holds various class instances

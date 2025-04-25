@@ -90,7 +90,7 @@ class PageTransition
      */
     function add_page_transition_script()
     {
-        if ( Helper::is_edit_mode(true) ) {
+        if (Helper::is_edit_mode(true)) {
             return;
         }
 
@@ -184,7 +184,8 @@ class PageTransition
         }
 
         echo '<script id="uicore-page-transition">';
-        echo 'document.querySelector(".uicore-animation-bg:not(.ui-transition)").remove(); ';
+        echo 'const animationBg = document.querySelector(".uicore-animation-bg:not(.ui-transition)");';
+        echo 'if(animationBg){ animationBg.remove(); }';
         echo $pre_js;
         echo " window.onload=window.onpageshow= function() { ";
         echo $js;
@@ -512,7 +513,7 @@ class PageTransition
         }
 
         echo $this->get_preloader_html($this->preloader);
-        ?>
+?>
         <script>
             const uiAnimPreloader = document.querySelector('.ui-anim-preloader');
 
@@ -537,7 +538,7 @@ class PageTransition
                 window.addEventListener('beforeunload', () => uiAnimateTogglePreloader(true));
             }
         </script>
-        <?php
+    <?php
     }
 
     /**
@@ -593,7 +594,7 @@ class PageTransition
         if (\class_exists('\UiCore\Settings')) {
             $color = \UiCore\Settings::color_filter($color);
         }
-        ?>
+    ?>
         <style>
             .ui-anim-preloader {
                 --ui-e-anim-preloader-color: <?php echo $color; ?>;
@@ -667,7 +668,7 @@ class PageTransition
                 <?php } ?>
             </div>
 
-        <?php
+<?php
         } elseif ($this->preloader === 'intro-words') {
             include 'preloaders/intro-words.php';
         } else {
