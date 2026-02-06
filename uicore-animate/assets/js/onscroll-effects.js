@@ -1,1 +1,561 @@
-function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _defineProperties(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,_toPropertyKey(r.key),r)}}function _createClass(e,t,n){return t&&_defineProperties(e.prototype,t),n&&_defineProperties(e,n),Object.defineProperty(e,"prototype",{writable:!1}),e}function _toPropertyKey(e){e=_toPrimitive(e,"string");return"symbol"==_typeof(e)?e:e+""}function _toPrimitive(e,t){if("object"!=_typeof(e)||!e)return e;var n=e[Symbol.toPrimitive];if(void 0===n)return("string"===t?String:Number)(e);n=n.call(e,t||"default");if("object"!=_typeof(n))return n;throw new TypeError("@@toPrimitive must return a primitive value.")}function _callSuper(e,t,n){return t=_getPrototypeOf(t),_possibleConstructorReturn(e,_isNativeReflectConstruct()?Reflect.construct(t,n||[],_getPrototypeOf(e).constructor):t.apply(e,n))}function _possibleConstructorReturn(e,t){if(t&&("object"==_typeof(t)||"function"==typeof t))return t;if(void 0!==t)throw new TypeError("Derived constructors may only return object or undefined");return _assertThisInitialized(e)}function _assertThisInitialized(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function _isNativeReflectConstruct(){try{var e=!Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],function(){}))}catch(e){}return(_isNativeReflectConstruct=function(){return!!e})()}function _getPrototypeOf(e){return(_getPrototypeOf=Object.setPrototypeOf?Object.getPrototypeOf.bind():function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),Object.defineProperty(e,"prototype",{writable:!1}),t&&_setPrototypeOf(e,t)}function _setPrototypeOf(e,t){return(_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(e,t){return e.__proto__=t,e})(e,t)}window.addEventListener("DOMContentLoaded",function(){var t=(()=>{function e(){return _classCallCheck(this,e),_callSuper(this,e,arguments)}return _inherits(e,elementorModules.frontend.handlers.Base),_createClass(e,[{key:"bindEvents",value:function(){var e,t=this;["","simple-sticky","mask-reveal",void 0].includes(this.getElementSettings("uicore_onscroll_effect"))||(e=this.$element.hasClass("e-con-boxed")?this.$element.find("> .e-con-inner > .e-con"):this.$element.find("> .e-con"),e=this.init(e),window.addEventListener("scroll",function(r){var o,i=1<arguments.length&&void 0!==arguments[1]?arguments[1]:1,l=!(2<arguments.length&&void 0!==arguments[2])||arguments[2];return function(){var e=this,t=arguments,n=l&&!o;clearTimeout(o),o=setTimeout(function(){o=null,l||r.apply(e,t)},i),n&&r.apply(e,t)}}(function(){return t.handleScroll(e)})),this.handleScroll(e)),this.addCss()}},{key:"onElementChange",value:function(e){"uicore_onscroll_effect"===e&&this.addCss()}},{key:"addCss",value:function(){var e,t=this.$element.attr("data-id"),n=(document.getElementById("uicore-onscroll-".concat(t))&&document.getElementById("uicore-onscroll-".concat(t)).remove(),document.getElementById("uicore-onscroll-sticky-".concat(t))&&document.getElementById("uicore-onscroll-sticky-".concat(t)).remove(),null);"mask-reveal"===this.getElementSettings("uicore_onscroll_effect")?((n=document.createElement("style")).id="uicore-onscroll-".concat(t),e=elementorFrontend.isEditMode()?"#ffffff24":"transparent",n.innerHTML="\n                    .elementor-element-".concat(t,"{\n                        min-height: var(--ui-e-onscroll-reveal-height,170vh);\n                        display: block;\n                        -webkit-mask-image: radial-gradient(circle at 50% 98%,white 37%,").concat(e," 50%);\n                        mask-image:radial-gradient(circle at 50% 98%,white 37%,").concat(e," 50%)\n                    }\n                    .elementor-element-").concat(t," > .e-con-inner{\n                        position:sticky;\n                        height:auto;\n                        top:var(--ui-e-onscroll-offset,0px);\n                    }\n                ")):["",void 0].includes(this.getElementSettings("uicore_onscroll_effect"))||((n=document.createElement("style")).id="uicore-onscroll-sticky-".concat(t),n.innerHTML="\n                .elementor-element-".concat(t,".e-con-boxed > .e-con-inner > *,\n                .elementor-element-").concat(t,".e-con-full > * {\n                    position:sticky;\n                    top:calc(var(--ui-e-onscroll-offset,0px) + calc(var(--ui-e-onscroll-items-offset) * var(--item-index)));\n                    margin-top:var(--ui-e-onscroll-items-offset,0px);\n                    transition-timing-function: cubic-bezier(0.17, 1.1, 0.42, 1) !important;\n                    transition: background var(--background-transition, .3s), border var(--border-transition, .3s), box-shadow var(--border-transition, .3s), transform var(--e-con-transform-transition-duration, 1s);\n                }\n                ")),n&&document.head.appendChild(n)}},{key:"handleScroll",value:function(i){var l=this,a=this.getAnimationOptions(),s=a.offsetPercentage||10,c=a.offsetEndPercentage||10,u=a.nextElementOffsetPercentage||10,f=a.intensity||1,m=window.innerHeight;i.forEach(function(e,t){var n=l.calculateScrollProgress(e,m,s,c),r=t===i.length-1||t===i.length-2,o=l.calculateNextElementProgress(i,t,m,u);l.applyTransformations(e,t,i.length,r,n,o,f,a,i.length)})}},{key:"calculateScrollProgress",value:function(e,t,n,r){var e=e.getBoundingClientRect(),o=e.height,e=e.top+document.documentElement.scrollTop,t=e-t+o*n/100;return Math.max(0,Math.min(1,(document.documentElement.scrollTop-t)/(e+o-o*r/100-t)))}},{key:"calculateNextElementProgress",value:function(e,t,n,r){var o=0;return t<e.length-1&&(t=(e=e[t+1].getBoundingClientRect()).height,n=(e=e.top+document.documentElement.scrollTop)-n+t*r/100,o=Math.max(0,Math.min(1,(document.documentElement.scrollTop-n)/(e+t-n)))),o}},{key:"applyTransformations",value:function(t,l,a,n,s,c,u,f,m){var d=f.excludeFromLast||[],p=f.useNextElementProgress||[];Object.keys(f.end).forEach(function(r){var o,i,e;n&&d.includes(r)||(o=(f.start&&f.start[r]?f.start:f.end)[r],i=f.end[r],e="object"===_typeof(o)&&"object"===_typeof(i)&&null==o.value&&null==i.value?Object.keys(o).map(function(e){var t=o[e],n=t.value,t=t.unit,n=parseFloat(n),n=(parseFloat(i[e].value)-n)*(p.includes(r)?c:s)*Math.pow(u,a-1-l)+n;return"".concat(e,"(").concat(n).concat(t,")")}).join(" "):(e=parseFloat(o.value),e=(parseFloat(i.value)-e)*(p.includes(r)&&1<m?c:s)*Math.pow(u,a-1-l)+e,"".concat(e).concat(o.unit)),t.style.setProperty(r,e))})}},{key:"init",value:function(e){e=Array.from(e);var t,n,r,o={};return"sticky-scale-alt"===this.getElementSettings("uicore_onscroll_effect")?o["transform-origin"]="center bottom":["sticky-mask","sticky-mask-grow"].includes(this.getElementSettings("uicore_onscroll_effect"))&&(o["clip-path"]="inset(0 var(--ui-e-onscroll-path,0%) round var(--ui-e-onscroll-path-radius,0))"),e.forEach(function(t,e){t.style.setProperty("--item-index",e),Object.keys(o).forEach(function(e){t.style[e]=o[e]})}),1<e.length&&(n=(t=e[e.length-1]).getBoundingClientRect().height,(r=document.createElement("div")).classList=t.classList,r.style.height="".concat(n,"px"),r.style.opacity=0,t.after(r),e.push(r)),e}},{key:"getAnimationOptions",value:function(){switch(this.getElementSettings("uicore_onscroll_effect")){case"sticky-scale":return{start:{filter:{brightness:{value:"100",unit:"%"},contrast:{value:"100",unit:"%"}},transform:{scale:{value:"1",unit:""}}},end:{filter:{brightness:{value:"93",unit:"%"},contrast:{value:"105",unit:"%"}},transform:{scale:{value:"0.9",unit:""}}},excludeFromLast:["filter"],useNextElementProgress:["transform","filter"],intensity:1.3,offsetPercentage:70};case"sticky-scale-small":return{start:{filter:{brightness:{value:"100",unit:"%"},contrast:{value:"100",unit:"%"}},transform:{scale:{value:"1",unit:""}}},end:{filter:{brightness:{value:"96",unit:"%"},contrast:{value:"103",unit:"%"}},transform:{scale:{value:"0.9",unit:""}}},excludeFromLast:["filter"],useNextElementProgress:["transform","filter"],intensity:1.5,offsetPercentage:90,nextElementOffsetPercentage:90};case"sticky-scale-alt":return{start:{filter:{brightness:{value:"100",unit:"%"},contrast:{value:"100",unit:"%"}},transform:{scale:{value:"1",unit:""}}},end:{filter:{brightness:{value:"97",unit:"%"},contrast:{value:"105",unit:"%"}},transform:{scale:{value:"0.95",unit:""}}},excludeFromLast:["filter"],useNextElementProgress:["transform","filter"],intensity:1.4,offsetPercentage:70};case"sticky-scale-blur":return{start:{filter:{brightness:{value:"100",unit:"%"},contrast:{value:"100",unit:"%"},blur:{value:"0",unit:"px"}},transform:{scale:{value:"1",unit:""}}},end:{filter:{brightness:{value:"93",unit:"%"},contrast:{value:"105",unit:"%"},blur:{value:"3",unit:"px"}},transform:{scale:{value:"0.9",unit:""}}},excludeFromLast:["filter"],useNextElementProgress:["transform","filter"],intensity:1.2,offsetPercentage:80};case"sticky-scale-blur-small":return{start:{filter:{brightness:{value:"100",unit:"%"},contrast:{value:"100",unit:"%"},blur:{value:"0",unit:"px"}},transform:{scale:{value:"1",unit:""}}},end:{filter:{brightness:{value:"93",unit:"%"},contrast:{value:"105",unit:"%"},blur:{value:"2",unit:"px"}},transform:{scale:{value:"0.9",unit:""}}},excludeFromLast:["filter"],useNextElementProgress:["transform","filter"],intensity:1.3,offsetPercentage:80,nextElementOffsetPercentage:90};case"sticky-parallax":return{start:{filter:{brightness:{value:"100",unit:"%"},contrast:{value:"100",unit:"%"}},transform:{translateY:{value:"0",unit:"%"}}},end:{filter:{brightness:{value:"98",unit:"%"},contrast:{value:"102",unit:"%"}},transform:{translateY:{value:"-20",unit:"%"}}},excludeFromLast:["filter"],useNextElementProgress:["transform","filter"],intensity:1.3,offsetPercentage:70};case"sticky-mask":return{start:{"--ui-e-onscroll-path":{value:"0",unit:"%"},"--ui-e-onscroll-path-radius":{value:"0",unit:"px"}},end:{"--ui-e-onscroll-path":{value:"14",unit:"%"},"--ui-e-onscroll-path-radius":{value:"30",unit:"px"}},useNextElementProgress:["--ui-e-onscroll-path","--ui-e-onscroll-path-radius"],intensity:1.3,offsetPercentage:80};case"sticky-mask-grow":return{start:{"--ui-e-onscroll-path":{value:"5",unit:"%"},"--ui-e-onscroll-path-radius":{value:"20",unit:"px"}},end:{"--ui-e-onscroll-path":{value:"0",unit:"%"},"--ui-e-onscroll-path-radius":{value:"0",unit:"px"}},useNextElementProgress:["--ui-e-onscroll-path","--ui-e-onscroll-path-radius"],intensity:4,offsetPercentage:1,offsetEndPercentage:85};default:return{}}}}])})();jQuery(window).on("elementor/frontend/init",function(){elementorFrontend.hooks.addAction("frontend/element_ready/container",function(e){elementorFrontend.elementsHandler.addHandler(t,{$element:e})})})},!1);
+window.addEventListener('DOMContentLoaded', () => {
+  // Constants for Configuration
+  const DEFAULT_INTENSITY = 1;
+  const DEFAULT_OFFSET_PERCENTAGE = 10;
+  const DEFAULT_OFFSET_END_PERCENTAGE = 10;
+
+  // Debounce Utility Function
+  const debounce = (func, wait = 1, immediate = true) => {
+    let timeout;
+    return function () {
+      const context = this,
+        args = arguments;
+      const later = function () {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      const callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
+  class onScrollEffects extends elementorModules.frontend.handlers.Base {
+    // Bind Events
+    bindEvents() {
+      if (!['', 'simple-sticky', 'mask-reveal', undefined].includes(this.getElementSettings('uicore_onscroll_effect'))) {
+        let $items = this.$element.hasClass('e-con-boxed') ? this.$element.find('> .e-con-inner > .e-con') : this.$element.find('> .e-con');
+        $items = this.init($items);
+        window.addEventListener('scroll', debounce(() => this.handleScroll($items)));
+        this.handleScroll($items);
+      }
+      this.addCss();
+    }
+    onElementChange(prop) {
+      if (prop === 'uicore_onscroll_effect') {
+        this.addCss();
+      }
+    }
+    addCss() {
+      //first try to remove the style tag if it exists
+      const id = this.$element.attr('data-id');
+      if (document.getElementById(`uicore-onscroll-${id}`)) {
+        document.getElementById(`uicore-onscroll-${id}`).remove();
+      }
+      if (document.getElementById(`uicore-onscroll-sticky-${id}`)) {
+        document.getElementById(`uicore-onscroll-sticky-${id}`).remove();
+      }
+      var style = null;
+      if (this.getElementSettings('uicore_onscroll_effect') === 'mask-reveal') {
+        style = document.createElement('style');
+        style.id = `uicore-onscroll-${id}`;
+        const toValue = elementorFrontend.isEditMode() ? '#ffffff24' : 'transparent';
+        style.innerHTML = `
+                    .elementor-element-${id}{
+                        min-height: var(--ui-e-onscroll-reveal-height,170vh);
+                        display: block;
+                        -webkit-mask-image: radial-gradient(circle at 50% 98%,white 37%,${toValue} 50%);
+                        mask-image:radial-gradient(circle at 50% 98%,white 37%,${toValue} 50%)
+                    }
+                    .elementor-element-${id} > .e-con-inner{
+                        position:sticky;
+                        height:auto;
+                        top:var(--ui-e-onscroll-offset,0px);
+                    }
+                `;
+      } else if (!['', undefined].includes(this.getElementSettings('uicore_onscroll_effect'))) {
+        style = document.createElement('style');
+        style.id = `uicore-onscroll-sticky-${id}`;
+        style.innerHTML = `
+                .elementor-element-${id}.e-con-boxed > .e-con-inner > *,
+                .elementor-element-${id}.e-con-full > * {
+                    position:sticky;
+                    top:calc(var(--ui-e-onscroll-offset, 0px) + calc(var(--ui-e-onscroll-items-offset, 0px) * var(--item-index, 1)));
+                    margin-top:var(--ui-e-onscroll-items-offset,0px);
+                    transition-timing-function: cubic-bezier(0.17, 1.1, 0.42, 1) !important;
+                    transition: background var(--background-transition, .3s), border var(--border-transition, .3s), box-shadow var(--border-transition, .3s), transform var(--e-con-transform-transition-duration, 1s);
+                }
+                `;
+      }
+      if (style) {
+        document.head.appendChild(style);
+      }
+    }
+
+    // Handle Scroll Event
+    handleScroll(elements) {
+      const animationOptions = this.getAnimationOptions();
+      const offsetPercentage = animationOptions.offsetPercentage || DEFAULT_OFFSET_PERCENTAGE;
+      const offsetEndPercentage = animationOptions.offsetEndPercentage || DEFAULT_OFFSET_END_PERCENTAGE;
+      const offsetNextElementPercentage = animationOptions.nextElementOffsetPercentage || DEFAULT_OFFSET_PERCENTAGE;
+      const intensity = animationOptions.intensity || DEFAULT_INTENSITY;
+      const windowHeight = window.innerHeight;
+      elements.forEach((element, index) => {
+        const progress = this.calculateScrollProgress(element, windowHeight, offsetPercentage, offsetEndPercentage);
+        const isLastElement = index === elements.length - 1 || index === elements.length - 2;
+        const nextElementProgress = this.calculateNextElementProgress(elements, index, windowHeight, offsetNextElementPercentage);
+        this.applyTransformations(element, index, elements.length, isLastElement, progress, nextElementProgress, intensity, animationOptions, elements.length);
+      });
+    }
+
+    // Calculate Scroll Progress
+    calculateScrollProgress(element, windowHeight, offsetPercentage, offsetEndPercentage) {
+      const rect = element.getBoundingClientRect();
+      const elementHeight = rect.height;
+      const triggerOffset = rect.top + document.documentElement.scrollTop;
+      const offset = elementHeight * offsetPercentage / 100;
+      const start = triggerOffset - windowHeight + offset;
+      const offsetEnd = elementHeight * offsetEndPercentage / 100;
+      const end = triggerOffset + elementHeight - offsetEnd;
+      return Math.max(0, Math.min(1, (document.documentElement.scrollTop - start) / (end - start)));
+    }
+
+    // Calculate Next Element Progress
+    calculateNextElementProgress(elements, index, windowHeight, offsetNextElementPercentage) {
+      let nextElementProgress = 0;
+      if (index < elements.length - 1) {
+        const nextElement = elements[index + 1];
+        const nextRect = nextElement.getBoundingClientRect();
+        const nextElementHeight = nextRect.height;
+        const nextTriggerOffset = nextRect.top + document.documentElement.scrollTop;
+        const offset = nextElementHeight * offsetNextElementPercentage / 100;
+        const nextStart = nextTriggerOffset - windowHeight + offset;
+        const nextEnd = nextTriggerOffset + nextElementHeight;
+        nextElementProgress = Math.max(0, Math.min(1, (document.documentElement.scrollTop - nextStart) / (nextEnd - nextStart)));
+      }
+      return nextElementProgress;
+    }
+
+    // Apply Transformations
+    applyTransformations(element, index, elementsLength, isLastElement, progress, nextElementProgress, intensity, animationOptions, length) {
+      const excludeFromLast = animationOptions.excludeFromLast || [];
+      const useNextElementProgress = animationOptions.useNextElementProgress || [];
+      Object.keys(animationOptions.end).forEach(property => {
+        if (isLastElement && excludeFromLast.includes(property)) {
+          return;
+        }
+        const startValue = animationOptions.start && animationOptions.start[property] ? animationOptions.start[property] : animationOptions.end[property];
+        const endValue = animationOptions.end[property];
+        let value;
+        if (typeof startValue === 'object' && typeof endValue === 'object' && startValue.value == undefined && endValue.value == undefined) {
+          const propValues = Object.keys(startValue).map(prop => {
+            const {
+              value,
+              unit
+            } = startValue[prop];
+            const start = parseFloat(value);
+            const end = parseFloat(endValue[prop].value);
+            const interpolatedValue = (end - start) * (useNextElementProgress.includes(property) ? nextElementProgress : progress) * Math.pow(intensity, elementsLength - 1 - index) + start;
+            return `${prop}(${interpolatedValue}${unit})`;
+          });
+          value = propValues.join(' ');
+        } else {
+          const start = parseFloat(startValue.value);
+          const end = parseFloat(endValue.value);
+          value = (end - start) * (useNextElementProgress.includes(property) && length > 1 ? nextElementProgress : progress) * Math.pow(intensity, elementsLength - 1 - index) + start;
+          value = `${value}${startValue.unit}`;
+        }
+        element.style.setProperty(property, value);
+      });
+    }
+
+    // Init props on items
+    init(elements) {
+      elements = Array.from(elements);
+
+      // Set extra properties on items based on the effect
+      const extraProperties = {};
+      if (this.getElementSettings('uicore_onscroll_effect') === 'sticky-scale-alt') {
+        extraProperties['transform-origin'] = 'center bottom';
+      } else if (['sticky-mask', 'sticky-mask-grow'].includes(this.getElementSettings('uicore_onscroll_effect'))) {
+        extraProperties['clip-path'] = 'inset(0 var(--ui-e-onscroll-path,0%) round var(--ui-e-onscroll-path-radius,0))';
+      }
+      elements.forEach((element, index) => {
+        // Set custom property for the index of the element
+        element.style.setProperty('--item-index', index);
+
+        // Set extra properties on items
+        Object.keys(extraProperties).forEach(property => {
+          element.style[property] = extraProperties[property];
+        });
+      });
+      // Add empty div after the last element to prevent layout shift
+      if (elements.length > 1) {
+        const lastElement = elements[elements.length - 1];
+        const lastElementHeight = lastElement.getBoundingClientRect().height;
+        const emptyDiv = document.createElement('div');
+        emptyDiv.classList = lastElement.classList;
+
+        //TODO: maybe split in half if is mobile
+        emptyDiv.style.height = `${lastElementHeight}px`;
+        emptyDiv.style.opacity = 0;
+        lastElement.after(emptyDiv);
+
+        //add the empty div to the elements array
+        elements.push(emptyDiv);
+      }
+      return elements;
+    }
+
+    // Get Animation Options
+    getAnimationOptions() {
+      const animation = this.getElementSettings('uicore_onscroll_effect');
+      switch (animation) {
+        case 'sticky-scale':
+          return {
+            start: {
+              filter: {
+                brightness: {
+                  value: '100',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '100',
+                  unit: '%'
+                }
+              },
+              transform: {
+                scale: {
+                  value: '1',
+                  unit: ''
+                }
+              }
+            },
+            end: {
+              filter: {
+                brightness: {
+                  value: '93',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '105',
+                  unit: '%'
+                }
+              },
+              transform: {
+                scale: {
+                  value: '0.9',
+                  unit: ''
+                }
+              }
+            },
+            excludeFromLast: ['filter'],
+            useNextElementProgress: ['transform', 'filter'],
+            intensity: 1.3,
+            //used to adjust the intensity of the effect based on the index of the element
+            offsetPercentage: 70 // start the animation when 10% of the element is visible
+          };
+        case 'sticky-scale-small':
+          return {
+            start: {
+              filter: {
+                brightness: {
+                  value: '100',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '100',
+                  unit: '%'
+                }
+              },
+              transform: {
+                scale: {
+                  value: '1',
+                  unit: ''
+                }
+              }
+            },
+            end: {
+              filter: {
+                brightness: {
+                  value: '96',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '103',
+                  unit: '%'
+                }
+              },
+              transform: {
+                scale: {
+                  value: '0.9',
+                  unit: ''
+                }
+              }
+            },
+            excludeFromLast: ['filter'],
+            useNextElementProgress: ['transform', 'filter'],
+            intensity: 1.5,
+            //used to adjust the intensity of the effect based on the index of the element
+            offsetPercentage: 90,
+            // start the animation when 10% of the element is visible
+            nextElementOffsetPercentage: 90
+          };
+        case 'sticky-scale-alt':
+          return {
+            start: {
+              filter: {
+                brightness: {
+                  value: '100',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '100',
+                  unit: '%'
+                }
+              },
+              transform: {
+                scale: {
+                  value: '1',
+                  unit: ''
+                }
+              }
+            },
+            end: {
+              filter: {
+                brightness: {
+                  value: '97',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '105',
+                  unit: '%'
+                }
+              },
+              transform: {
+                scale: {
+                  value: '0.95',
+                  unit: ''
+                }
+              }
+            },
+            excludeFromLast: ['filter'],
+            useNextElementProgress: ['transform', 'filter'],
+            intensity: 1.4,
+            //used to adjust the intensity of the effect based on the index of the element
+            offsetPercentage: 70 // start the animation when 10% of the element is visible
+          };
+        case 'sticky-scale-blur':
+          return {
+            start: {
+              filter: {
+                brightness: {
+                  value: '100',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '100',
+                  unit: '%'
+                },
+                blur: {
+                  value: '0',
+                  unit: 'px'
+                }
+              },
+              transform: {
+                scale: {
+                  value: '1',
+                  unit: ''
+                }
+              }
+            },
+            end: {
+              filter: {
+                brightness: {
+                  value: '93',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '105',
+                  unit: '%'
+                },
+                blur: {
+                  value: '3',
+                  unit: 'px'
+                }
+              },
+              transform: {
+                scale: {
+                  value: '0.9',
+                  unit: ''
+                }
+              }
+            },
+            excludeFromLast: ['filter'],
+            useNextElementProgress: ['transform', 'filter'],
+            intensity: 1.2,
+            //used to adjust the intensity of the effect based on the index of the element
+            offsetPercentage: 80 // start the animation when 10% of the element is visible
+          };
+        case 'sticky-scale-blur-small':
+          return {
+            start: {
+              filter: {
+                brightness: {
+                  value: '100',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '100',
+                  unit: '%'
+                },
+                blur: {
+                  value: '0',
+                  unit: 'px'
+                }
+              },
+              transform: {
+                scale: {
+                  value: '1',
+                  unit: ''
+                }
+              }
+            },
+            end: {
+              filter: {
+                brightness: {
+                  value: '93',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '105',
+                  unit: '%'
+                },
+                blur: {
+                  value: '2',
+                  unit: 'px'
+                }
+              },
+              transform: {
+                scale: {
+                  value: '0.9',
+                  unit: ''
+                }
+              }
+            },
+            excludeFromLast: ['filter'],
+            useNextElementProgress: ['transform', 'filter'],
+            intensity: 1.3,
+            //used to adjust the intensity of the effect based on the index of the element
+            offsetPercentage: 80,
+            // start the animation when 10% of the element is visible
+            nextElementOffsetPercentage: 90
+          };
+        case 'sticky-parallax':
+          return {
+            start: {
+              filter: {
+                brightness: {
+                  value: '100',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '100',
+                  unit: '%'
+                }
+              },
+              transform: {
+                translateY: {
+                  value: '0',
+                  unit: '%'
+                }
+              }
+            },
+            end: {
+              filter: {
+                brightness: {
+                  value: '98',
+                  unit: '%'
+                },
+                contrast: {
+                  value: '102',
+                  unit: '%'
+                }
+              },
+              transform: {
+                translateY: {
+                  value: '-20',
+                  unit: '%'
+                }
+              }
+            },
+            excludeFromLast: ['filter'],
+            useNextElementProgress: ['transform', 'filter'],
+            intensity: 1.3,
+            //used to adjust the intensity of the effect based on the index of the element
+            offsetPercentage: 70 // start the animation when 10% of the element is visible
+          };
+        case 'sticky-mask':
+          //uses clip-path to create a mask effect
+          return {
+            start: {
+              '--ui-e-onscroll-path': {
+                value: '0',
+                unit: '%'
+              },
+              '--ui-e-onscroll-path-radius': {
+                value: '0',
+                unit: 'px'
+              }
+            },
+            end: {
+              '--ui-e-onscroll-path': {
+                value: '14',
+                unit: '%'
+              },
+              '--ui-e-onscroll-path-radius': {
+                value: '30',
+                unit: 'px'
+              }
+            },
+            useNextElementProgress: ['--ui-e-onscroll-path', '--ui-e-onscroll-path-radius'],
+            intensity: 1.3,
+            //used to adjust the intensity of the effect based on the index of the element
+            offsetPercentage: 80 // start the animation when 10% of the element is visible
+          };
+        case 'sticky-mask-grow':
+          //uses clip-path to create a mask effect
+          return {
+            start: {
+              '--ui-e-onscroll-path': {
+                value: '5',
+                unit: '%'
+              },
+              '--ui-e-onscroll-path-radius': {
+                value: '20',
+                unit: 'px'
+              }
+            },
+            end: {
+              '--ui-e-onscroll-path': {
+                value: '0',
+                unit: '%'
+              },
+              '--ui-e-onscroll-path-radius': {
+                value: '0',
+                unit: 'px'
+              }
+            },
+            useNextElementProgress: ['--ui-e-onscroll-path', '--ui-e-onscroll-path-radius'],
+            intensity: 4,
+            //used to adjust the intensity of the effect based on the index of the element
+            offsetPercentage: 1,
+            // start the animation when 10% of the element is visible
+            offsetEndPercentage: 85
+          };
+        default:
+          return {};
+      }
+    }
+  }
+
+  // Init Elementor Hooks
+  jQuery(window).on('elementor/frontend/init', () => {
+    const addHandler = $element => {
+      elementorFrontend.elementsHandler.addHandler(onScrollEffects, {
+        $element
+      });
+    };
+    elementorFrontend.hooks.addAction('frontend/element_ready/container', addHandler);
+  });
+}, false);

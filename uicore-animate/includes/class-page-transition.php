@@ -32,6 +32,10 @@ class PageTransition
 
     public function __construct()
     {
+        if (Helper::is_edit_mode(true)) {
+            return;
+        }
+
         add_action('init', function () {
             remove_action('uicore_before_content', '\UiCore\Animations::add_page_transition_script');
             remove_action('wp_body_open', '\UiCore\Animations::add_transition_markup');
@@ -46,10 +50,6 @@ class PageTransition
 
         //continue only if the animations are enabled
         if ($this->animation != 'none') {
-
-            if (Helper::is_edit_mode(true)) {
-                return;
-            }
 
             if (!\class_exists('\UiCore\Core')) {
                 $this->body_selector = 'body';

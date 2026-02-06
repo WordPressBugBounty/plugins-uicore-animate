@@ -1,1 +1,143 @@
-function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function _toConsumableArray(e){return _arrayWithoutHoles(e)||_iterableToArray(e)||_unsupportedIterableToArray(e)||_nonIterableSpread()}function _nonIterableSpread(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function _unsupportedIterableToArray(e,t){var r;if(e)return"string"==typeof e?_arrayLikeToArray(e,t):"Map"===(r="Object"===(r={}.toString.call(e).slice(8,-1))&&e.constructor?e.constructor.name:r)||"Set"===r?Array.from(e):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?_arrayLikeToArray(e,t):void 0}function _iterableToArray(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)}function _arrayWithoutHoles(e){if(Array.isArray(e))return _arrayLikeToArray(e)}function _arrayLikeToArray(e,t){(null==t||t>e.length)&&(t=e.length);for(var r=0,o=Array(t);r<t;r++)o[r]=e[r];return o}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _defineProperties(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,_toPropertyKey(o.key),o)}}function _createClass(e,t,r){return t&&_defineProperties(e.prototype,t),r&&_defineProperties(e,r),Object.defineProperty(e,"prototype",{writable:!1}),e}function _toPropertyKey(e){e=_toPrimitive(e,"string");return"symbol"==_typeof(e)?e:e+""}function _toPrimitive(e,t){if("object"!=_typeof(e)||!e)return e;var r=e[Symbol.toPrimitive];if(void 0===r)return("string"===t?String:Number)(e);r=r.call(e,t||"default");if("object"!=_typeof(r))return r;throw new TypeError("@@toPrimitive must return a primitive value.")}function _callSuper(e,t,r){return t=_getPrototypeOf(t),_possibleConstructorReturn(e,_isNativeReflectConstruct()?Reflect.construct(t,r||[],_getPrototypeOf(e).constructor):t.apply(e,r))}function _possibleConstructorReturn(e,t){if(t&&("object"==_typeof(t)||"function"==typeof t))return t;if(void 0!==t)throw new TypeError("Derived constructors may only return object or undefined");return _assertThisInitialized(e)}function _assertThisInitialized(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function _isNativeReflectConstruct(){try{var e=!Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],function(){}))}catch(e){}return(_isNativeReflectConstruct=function(){return!!e})()}function _getPrototypeOf(e){return(_getPrototypeOf=Object.setPrototypeOf?Object.getPrototypeOf.bind():function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),Object.defineProperty(e,"prototype",{writable:!1}),t&&_setPrototypeOf(e,t)}function _setPrototypeOf(e,t){return(_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(e,t){return e.__proto__=t,e})(e,t)}window.addEventListener("DOMContentLoaded",function(){var t=(()=>{function e(){return _classCallCheck(this,e),_callSuper(this,e,arguments)}return _inherits(e,elementorModules.frontend.handlers.Base),_createClass(e,[{key:"bindEvents",value:function(){this.setVariables()}},{key:"debounce",value:function(o){var n,i=1<arguments.length&&void 0!==arguments[1]?arguments[1]:1,a=!(2<arguments.length&&void 0!==arguments[2])||arguments[2];return function(){var e=this,t=arguments,r=a&&!n;clearTimeout(n),n=setTimeout(function(){n=null,a||o.apply(e,t)},i),r&&o.apply(e,t)}}},{key:"onElementChange",value:function(e){"uicore_animated_border"!==e&&!e.includes("border")&&"uicore_animated_border_item"!==e||e.includes("animated_border_color")||this.debounce(this.setVariables(),50)}},{key:"getChild",value:function(){var e=this.$element;if(this.$element.hasClass("e-con")||this.$element.hasClass("ui-borderanim-rotate_item")||this.$element.hasClass("ui-borderanim-hover_item")||(e=this.$element.find("> .elementor-widget-container")),this.$element.hasClass("ui-borderanim-rotate_item")||this.$element.hasClass("ui-borderanim-hover_item"))switch(this.getWidgetType()){case"uicore-icon-list":e=this.$element.find("> .elementor-widget-container .ui-e-wrap");break;case"uicore-advanced-post-carousel":case"uicore-advanced-post-grid":e=this.$element.find("> .elementor-widget-container .ui-e-item>article");break;default:e=this.$element.find("> .elementor-widget-container .ui-e-wrap")}return e}},{key:"setVariables",value:function(){var s,e,l=this;(this.$element.hasClass("ui-borderanim-rotate")||this.$element.hasClass("ui-borderanim-hover")||this.$element.hasClass("ui-borderanim-rotate_item")||this.$element.hasClass("ui-borderanim-hover_item"))&&((e=this.getChild()).css("border-style",""),e.css("border-color",""),e.css("border-width",""),s=this,e=0,elementorFrontend.isEditMode()&&(e=5),setTimeout(function(){var e=l.getChild(),t=Math.ceil(parseFloat(e.css("border-top-width").replace("px","")))+"px",r=Math.ceil(parseFloat(e.css("border-right-width").replace("px","")))+"px",o=Math.ceil(parseFloat(e.css("border-bottom-width").replace("px","")))+"px",n=Math.ceil(parseFloat(e.css("border-left-width").replace("px","")))+"px",i=e.css("border-radius"),a=e.css("border-color");(s.$element.hasClass("ui-borderanim-hover")||s.$element.hasClass("ui-borderanim-hover_item"))&&(s.$element.hasClass("e-con")||e.css("border-color","transparent"),e.css("z-index",2),e.css("position","relative"),e.css("margin","".concat(-t," ").concat(-r," ").concat(-o," ").concat(-n)),e.parent().css("position","relative"),s.$element.hasClass("ui-borderanim-hover_item")&&e.css("border-width",0),s.initHoverAnimation()),s.$element.hasClass("ui-borderanim-rotate_item")&&e.css("border-style","none"),s.$element.css("--ui-borderanim-width-top",t),s.$element.css("--ui-borderanim-width-right",r),s.$element.css("--ui-borderanim-width-bottom",o),s.$element.css("--ui-borderanim-width-left",n),s.$element.css("--ui-borderanim-radius",i),s.$element.css("--ui-borderanim-basecolor",a)},e))}},{key:"initHoverAnimation",value:function(){var e=this;window.innerWidth<768||window.uicore_hover_animation||document.addEventListener("mousemove",function(i){window.uicore_hover_animation=!0;[].concat(_toConsumableArray(jQuery(".ui-borderanim-hover")),_toConsumableArray(e.getChild().parent())).forEach(function(e){var t=e.getBoundingClientRect(),r=i.clientX-t.left,o=i.clientY-t.top,n=Math.max(0,Math.abs(r)-t.width),t=Math.max(0,Math.abs(o)-t.height),n=Math.sqrt(Math.pow(n,2)+Math.pow(t,2));n<200?(e.style.setProperty("--xPos","".concat(r,"px")),e.style.setProperty("--yPos","".concat(o,"px")),e.style.setProperty("--proximity","".concat(1-n/200))):e.style.setProperty("--proximity","0")})})}}])})();jQuery(window).on("elementor/frontend/init",function(){function e(e){elementorFrontend.elementsHandler.addHandler(t,{$element:e})}elementorFrontend.hooks.addAction("frontend/element_ready/global",e),elementorFrontend.hooks.addAction("frontend/element_ready/section",e),elementorFrontend.hooks.addAction("frontend/element_ready/container",e)})},!1);
+window.addEventListener('DOMContentLoaded', () => {
+  class animatedBorder extends elementorModules.frontend.handlers.Base {
+    bindEvents() {
+      this.setVariables();
+    }
+    // getWidgetType() {
+    //     return 'global';
+    // }
+    debounce(func, wait = 1, immediate = true) {
+      let timeout;
+      return function () {
+        const context = this,
+          args = arguments;
+        const later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    }
+    onElementChange(prop) {
+      //check if prop was uicon_animated_border or  the changed prop string contains border word in it
+      if ((prop === 'uicore_animated_border' || prop.includes('border') || prop === 'uicore_animated_border_item') && !prop.includes('animated_border_color')) {
+        this.debounce(this.setVariables(), 50);
+      }
+      return;
+    }
+    getChild() {
+      var $el = this.$element;
+      if (!this.$element.hasClass('e-con') && !this.$element.hasClass('ui-borderanim-rotate_item') && !this.$element.hasClass('ui-borderanim-hover_item')) {
+        $el = elementorFrontend.config.experimentalFeatures.e_optimized_markup ? this.$element : this.$element.find('> .elementor-widget-container');
+      }
+      if (this.$element.hasClass('ui-borderanim-rotate_item') || this.$element.hasClass('ui-borderanim-hover_item')) {
+        const type = this.getWidgetType();
+        switch (type) {
+          case 'uicore-icon-list':
+            $el = this.$element.find('.ui-e-wrap');
+            break;
+          case 'uicore-advanced-post-carousel':
+          case 'uicore-advanced-post-grid':
+            $el = this.$element.find('.ui-e-item > article');
+            break;
+          default:
+            $el = this.$element.find('.ui-e-wrap');
+        }
+      }
+      return $el;
+    }
+    setVariables() {
+      //check if element has the class that defines the animation or the item aniamtion
+      if (!this.$element.hasClass('ui-borderanim-rotate') && !this.$element.hasClass('ui-borderanim-hover') && !this.$element.hasClass('ui-borderanim-rotate_item') && !this.$element.hasClass('ui-borderanim-hover_item')) {
+        return;
+      }
+      var $el = this.getChild();
+      $el.css('border-style', '');
+      $el.css('border-color', '');
+      $el.css('border-width', '');
+      let _this = this;
+      var delay = 0;
+      if (elementorFrontend.isEditMode()) {
+        delay = 5;
+      }
+      setTimeout(() => {
+        var $el = this.getChild();
+
+        // There's no child when animating widgets directly
+        if (!$el.length) {
+          $el = this.$element;
+        }
+        var borderWidthTop = Math.ceil(parseFloat($el.css('border-top-width').replace('px', ''))) + "px";
+        var borderWidthRight = Math.ceil(parseFloat($el.css('border-right-width').replace('px', ''))) + "px";
+        var borderWidthBottom = Math.ceil(parseFloat($el.css('border-bottom-width').replace('px', ''))) + "px";
+        var borderWidthLeft = Math.ceil(parseFloat($el.css('border-left-width').replace('px', ''))) + "px";
+        var borderRadius = $el.css('border-radius');
+        var bordercolor = $el.css('border-color');
+        if (_this.$element.hasClass('ui-borderanim-hover') || _this.$element.hasClass('ui-borderanim-hover_item')) {
+          if (!_this.$element.hasClass('e-con')) {
+            $el.css('border-color', 'transparent');
+          }
+          $el.css('z-index', 2);
+          $el.css('position', 'relative');
+          $el.css('margin', `${-borderWidthTop} ${-borderWidthRight} ${-borderWidthBottom} ${-borderWidthLeft}`);
+          //set position relative on parent (for before and after element to work properly)
+          $el.parent().css('position', 'relative');
+          if (_this.$element.hasClass('ui-borderanim-hover_item')) {
+            $el.css('border-width', 0); //remove border from item because the background is set on a child and this will make the border duble
+          }
+          _this.initHoverAnimation();
+        }
+        if (_this.$element.hasClass('ui-borderanim-rotate_item')) {
+          $el.css('border-style', 'none');
+        }
+
+        //set them to after element
+        _this.$element.css('--ui-borderanim-width-top', borderWidthTop);
+        _this.$element.css('--ui-borderanim-width-right', borderWidthRight);
+        _this.$element.css('--ui-borderanim-width-bottom', borderWidthBottom);
+        _this.$element.css('--ui-borderanim-width-left', borderWidthLeft);
+        _this.$element.css('--ui-borderanim-radius', borderRadius);
+        _this.$element.css('--ui-borderanim-basecolor', bordercolor);
+      }, delay);
+    }
+    initHoverAnimation() {
+      //add handler but make sure is only added once
+      if (window.innerWidth < 768 || window.uicore_hover_animation) {
+        return;
+      }
+      document.addEventListener("mousemove", $event => {
+        window.uicore_hover_animation = true;
+        const proximity = 200;
+        const hoverElements = [...jQuery(".ui-borderanim-hover"), ...this.getChild().parent()];
+        hoverElements.forEach(element => {
+          const rect = element.getBoundingClientRect();
+          const x = $event.clientX - rect.left;
+          const y = $event.clientY - rect.top;
+          const distanceX = Math.max(0, Math.abs(x) - rect.width);
+          const distanceY = Math.max(0, Math.abs(y) - rect.height);
+          const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
+          if (distance < proximity) {
+            element.style.setProperty("--xPos", `${x}px`);
+            element.style.setProperty("--yPos", `${y}px`);
+            element.style.setProperty("--proximity", `${1 - distance / proximity}`);
+          } else {
+            element.style.setProperty("--proximity", `0`);
+          }
+        });
+      });
+    }
+  }
+  jQuery(window).on('elementor/frontend/init', () => {
+    const addHandler = $element => {
+      elementorFrontend.elementsHandler.addHandler(animatedBorder, {
+        $element
+      });
+    };
+    elementorFrontend.hooks.addAction('frontend/element_ready/global', addHandler);
+    elementorFrontend.hooks.addAction('frontend/element_ready/section', addHandler);
+    elementorFrontend.hooks.addAction('frontend/element_ready/container', addHandler);
+  });
+}, false);

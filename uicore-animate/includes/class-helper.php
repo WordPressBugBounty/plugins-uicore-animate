@@ -58,6 +58,73 @@ class Helper
         ];
     }
 
+    /**
+     * Returns the list of Animated Background animations
+     *
+     * @param bool $grouped - Whether to return the list grouped by categories
+     *
+     * @return array
+     */
+    static function get_background_animations_list(bool $grouped = false)
+    {
+        $css = [
+            'ui-fluid-animation-1' => __('Style 1', 'uicore-animate'),
+            'ui-fluid-animation-2' => __('Style 2', 'uicore-animate'),
+            'ui-fluid-animation-3' => __('Style 3', 'uicore-animate'),
+            'ui-fluid-animation-4' => __('Style 4', 'uicore-animate'),
+            'ui-fluid-animation-5' => __('Style 5', 'uicore-animate'),
+        ];
+
+        $gradients = [
+            'ui-fluid-animation-6' => __('Fluid Gradient', 'uicore-animate'),
+            'borealis'         => __('Borealis', 'uicore-animate'),
+            'gradient-mesh'    => __('Gradient Mesh', 'uicore-animate'),
+            'mist'             => __('Mist', 'uicore-animate'),
+            'mystic-lake'      => __('Mystic Lake', 'uicore-animate'),
+            'noir-haze'        => __('Noir Haze', 'uicore-animate'),
+            'void-wave'        => __('Void Wave', 'uicore-animate'),
+            'halftone'         => __('Halftone', 'uicore-animate'),
+        ];
+
+        $lights = [
+            'the-shining'      => __('The Shining', 'uicore-animate'),
+            'phase-tunnel'      => __('Phase Tunel', 'uicore-animate'),
+            'plasma-line'      => __('Plasma Line', 'uicore-animate'),
+            'light-strings'    => __('Light Strings', 'uicore-animate'),
+        ];
+
+        $shapes = [
+            'flame'            => __('Flame', 'uicore-animate'),
+            'pulse-bubble'     => __('Pulse Bubble', 'uicore-animate'),
+            'neon-eclipse'     => __('Neon Eclipse', 'uicore-animate'),
+            'echo-sphere'      => __('Echo Sphere', 'uicore-animate'),
+        ];
+
+        $images = [
+            'liquid-mask'      => __('Liquid Mask', 'uicore-animate'),
+            'liquid-image'      => __('Liquid Image', 'uicore-animate'),
+        ];
+
+        $others = [
+            'bit-wave'         => __('Bit Wave', 'uicore-animate'),
+            'flux-stripes'     => __('Flux Stripes', 'uicore-animate'),
+            'perspective-grid' => __('Perspective Grid', 'uicore-animate'),
+        ];
+
+        if ($grouped) {
+            return [
+                'css-animations' => $css,
+                'gradients' => $gradients,
+                'lights' => $lights,
+                'shapes' => $shapes,
+                'images' => $images,
+                'others' => $others,
+            ];
+        }
+
+        return array_merge($css, $gradients, $lights, $shapes, $images, $others);
+    }
+
     static function get_animations_list()
     {
         $animations = [
@@ -106,17 +173,18 @@ class Helper
         return array_merge($animations, $new_animations);
     }
 
-     /**
+    /**
      * Check if we're on Elementor Edit or Preview mode.
      *
      * @param bool $server_method - If true, checks for elementor URI request parameters instead of using elementor API.
      *
      * @return bool
      */
-    static function is_edit_mode( $server_method = false ) {
+    static function is_edit_mode($server_method = false)
+    {
 
         // Cases where Elementor instance is not available
-        if($server_method){
+        if ($server_method) {
             if (
                 strpos($_SERVER['REQUEST_URI'], 'elementor') !== false ||
                 (
@@ -133,7 +201,7 @@ class Helper
 
         // Default elementor method
         $elementor_instance = \Elementor\Plugin::instance();
-        if ( $elementor_instance->preview->is_preview_mode() || $elementor_instance->editor->is_edit_mode() ) {
+        if ($elementor_instance->preview->is_preview_mode() || $elementor_instance->editor->is_edit_mode()) {
             return true;
         }
 

@@ -3,14 +3,14 @@
 Plugin Name: UiCore Animate
 Plugin URI: https://animate.uicore.co
 Description: Animate your design in just a few clicks.
-Version: 2.1.7
+Version: 2.2.3
 Author: UiCore
 Author URI: https://uicore.co
 License: GPL3
 Text Domain: uicore-animate
 Domain Path: /languages
  * Elementor requires at least: 3.8.0
- * Elementor tested up to: 3.29.2
+ * Elementor tested up to: 3.34.4
 */
 
 namespace UiCoreAnimate;
@@ -31,7 +31,7 @@ final class Base
      *
      * @var string
      */
-    public $version = '2.1.7';
+    public $version = '2.2.3';
 
     /**
      * Holds various class instances
@@ -115,7 +115,7 @@ final class Base
         define('UICORE_ANIMATE_INCLUDES', UICORE_ANIMATE_PATH . '/includes');
         define('UICORE_ANIMATE_URL', plugins_url('', UICORE_ANIMATE_FILE));
         define('UICORE_ANIMATE_ASSETS', UICORE_ANIMATE_URL . '/assets');
-        define('UICORE_ANIMATE_BADGE', '<span title="Powerd by UiCore Animate" style="font-size:10px;font-weight:500;background:#5dbad8;color:black;padding:2px 5px;border-radius:3px;margin-right:4px;">UiCore</span> ');
+        define('UICORE_ANIMATE_BADGE', '<span title="Powerd by UiCore Animate" style="font-size:10px;font-weight:500;background:#5dbad8;color:black;padding:2px 5px;border-radius:3px;margin-right:4px;line-height:2.5em;">UiCore</span> ');
     }
 
     /**
@@ -166,7 +166,15 @@ final class Base
         require_once UICORE_ANIMATE_INCLUDES . '/class-settings.php';
         require_once UICORE_ANIMATE_INCLUDES . '/class-assets.php';
 
+        require_once UICORE_ANIMATE_INCLUDES . '/class-gutenberg.php';
+
+
         if (\class_exists('Elementor\Plugin')) {
+            require_once UICORE_ANIMATE_INCLUDES . '/elementor/split-text.php';
+            require_once UICORE_ANIMATE_INCLUDES . '/elementor/floating-widget.php';
+            require_once UICORE_ANIMATE_INCLUDES . '/elementor/animated-background.php';
+            require_once UICORE_ANIMATE_INCLUDES . '/elementor/animated-border.php';
+            require_once UICORE_ANIMATE_INCLUDES . '/elementor/scroll-effects.php';
             require_once UICORE_ANIMATE_INCLUDES . '/class-elementor.php';
         }
 

@@ -1,1 +1,56 @@
-function _toConsumableArray(r){return _arrayWithoutHoles(r)||_iterableToArray(r)||_unsupportedIterableToArray(r)||_nonIterableSpread()}function _nonIterableSpread(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function _unsupportedIterableToArray(r,t){var a;if(r)return"string"==typeof r?_arrayLikeToArray(r,t):"Map"===(a="Object"===(a={}.toString.call(r).slice(8,-1))&&r.constructor?r.constructor.name:a)||"Set"===a?Array.from(r):"Arguments"===a||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a)?_arrayLikeToArray(r,t):void 0}function _iterableToArray(r){if("undefined"!=typeof Symbol&&null!=r[Symbol.iterator]||null!=r["@@iterator"])return Array.from(r)}function _arrayWithoutHoles(r){if(Array.isArray(r))return _arrayLikeToArray(r)}function _arrayLikeToArray(r,t){(null==t||t>r.length)&&(t=r.length);for(var a=0,e=Array(t);a<t;a++)e[a]=r[a];return e}document.addEventListener("DOMContentLoaded",function(){var r=document.querySelectorAll("[data-ui-animation]"),t=new IntersectionObserver(function(r,n){r.forEach(function(r){var t,a,e;r.isIntersecting&&(a=r.target.getAttribute("data-ui-animation"),e=r.target.getAttribute("data-ui-duration"),(t=r.target.classList).add.apply(t,_toConsumableArray(a.split(" "))),r.target.classList.remove("uicore-animate-hide"),"fast"===e?r.target.classList.add("animated","animated-fast"):"slow"===e?r.target.classList.add("animated","animated-slow"):r.target.classList.add("animated"),n.unobserve(r.target))})},{rootMargin:"50px",threshold:0});r.forEach(function(r){t.observe(r)})});
+document.addEventListener('DOMContentLoaded', () => {
+  // Select all elements with the data-animation attribute
+  const elementsToAnimate = document.querySelectorAll('[data-ui-animation]');
+
+  // Create an Intersection Observer instance
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const animationName = el.getAttribute("data-ui-animation");
+      const animationSpeed = el.getAttribute("data-ui-duration");
+
+      // 1. Add animation speed class
+      if (animationSpeed === "fast") {
+        el.classList.add("animated", "animated-fast");
+      } else if (animationSpeed === "slow") {
+        el.classList.add("animated", "animated-slow");
+      } else {
+        el.classList.add("animated");
+      }
+
+      // 2. Add animation name class(es)
+      if (animationName) {
+        el.classList.add(...animationName.split(" "));
+      }
+
+      // 3. Remove hide ONLY when animation really starts
+      const onStart = () => {
+        el.classList.remove("uicore-animate-hide");
+        el.removeEventListener("animationstart", onStart);
+      };
+      el.addEventListener("animationstart", onStart, {
+        once: true
+      });
+
+      // 4. Safety fallback: if animation has NO delay, remove instantly next frame
+      requestAnimationFrame(() => {
+        if (getComputedStyle(el).animationDelay === "0s") {
+          el.classList.remove("uicore-animate-hide");
+        }
+      });
+
+      // 5. Stop observing after trigger
+      observer.unobserve(el);
+    });
+  }, {
+    rootMargin: '10px',
+    // Adjust the root margin as needed
+    threshold: 0 // Adjust threshold as needed to control when animation is triggered
+  });
+
+  // Observe each element that should be animated
+  elementsToAnimate.forEach(element => {
+    observer.observe(element);
+  });
+});

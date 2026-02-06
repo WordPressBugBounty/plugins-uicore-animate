@@ -1,1 +1,698 @@
-function _defineProperty(t,e,i){return(e=_toPropertyKey(e))in t?Object.defineProperty(t,e,{value:i,enumerable:!0,configurable:!0,writable:!0}):t[e]=i,t}function _classCallCheck(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function _defineProperties(t,e){for(var i=0;i<e.length;i++){var n=e[i];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,_toPropertyKey(n.key),n)}}function _createClass(t,e,i){return e&&_defineProperties(t.prototype,e),i&&_defineProperties(t,i),Object.defineProperty(t,"prototype",{writable:!1}),t}function _toPropertyKey(t){t=_toPrimitive(t,"string");return"symbol"==_typeof(t)?t:t+""}function _toPrimitive(t,e){if("object"!=_typeof(t)||!t)return t;var i=t[Symbol.toPrimitive];if(void 0===i)return("string"===e?String:Number)(t);i=i.call(t,e||"default");if("object"!=_typeof(i))return i;throw new TypeError("@@toPrimitive must return a primitive value.")}function _typeof(t){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}(t=>{"object"===("undefined"==typeof exports?"undefined":_typeof(exports))&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):("undefined"!=typeof globalThis?globalThis:self).Lenis=t()})(function(){function p(t,e,i){return Math.max(t,Math.min(e,i))}var w=(()=>_createClass(function t(){_classCallCheck(this,t)},[{key:"advance",value:function(t){var e,i,n,o,s;this.isRunning&&(e=!1,this.lerp?(this.value=(i=this.value,n=this.to,o=60*this.lerp,s=t,i=i,n=n,(1-(o=1-Math.exp(-o*s)))*i+o*n),Math.round(this.value)===this.to&&(this.value=this.to,e=!0)):(this.currentTime+=t,i=(e=1<=(s=p(0,this.currentTime/this.duration,1)))?1:this.easing(s),this.value=this.from+(this.to-this.from)*i),null!=(o=this.onUpdate)&&o.call(this,this.value,e),e)&&this.stop()}},{key:"stop",value:function(){this.isRunning=!1}},{key:"fromTo",value:function(t,e,i){var n=i.lerp,n=void 0===n?.1:n,o=i.duration,o=void 0===o?1:o,s=i.easing,s=void 0===s?function(t){return t}:s,r=i.onStart,i=i.onUpdate;this.from=this.value=t,this.to=e,this.lerp=n,this.duration=o,this.easing=s,this.currentTime=0,this.isRunning=!0,null!=r&&r(),this.onUpdate=i}}]))();var b=(()=>_createClass(function t(){var i,n,o,e=this,s=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{},r=s.wrapper,l=s.content,a=s.autoResize,a=void 0===a||a,s=s.debounce,s=void 0===s?250:s;_classCallCheck(this,t),_defineProperty(this,"resize",function(){e.onWrapperResize(),e.onContentResize()}),_defineProperty(this,"onWrapperResize",function(){e.wrapper===window?(e.width=window.innerWidth,e.height=window.innerHeight):(e.width=e.wrapper.clientWidth,e.height=e.wrapper.clientHeight)}),_defineProperty(this,"onContentResize",function(){e.wrapper===window?(e.scrollHeight=e.content.scrollHeight,e.scrollWidth=e.content.scrollWidth):(e.scrollHeight=e.wrapper.scrollHeight,e.scrollWidth=e.wrapper.scrollWidth)}),this.wrapper=r,this.content=l,a&&(this.debouncedResize=(i=this.resize,n=s,function(){var t=arguments,e=this;clearTimeout(o),o=setTimeout(function(){i.apply(e,t)},n)}),this.wrapper===window?window.addEventListener("resize",this.debouncedResize,!1):(this.wrapperResizeObserver=new ResizeObserver(this.debouncedResize),this.wrapperResizeObserver.observe(this.wrapper)),this.contentResizeObserver=new ResizeObserver(this.debouncedResize),this.contentResizeObserver.observe(this.content)),this.resize()},[{key:"destroy",value:function(){var t;null!=(t=this.wrapperResizeObserver)&&t.disconnect(),null!=(t=this.contentResizeObserver)&&t.disconnect(),window.removeEventListener("resize",this.debouncedResize,!1)}},{key:"limit",get:function(){return{x:this.scrollWidth-this.width,y:this.scrollHeight-this.height}}}]))(),k=(()=>_createClass(function t(){_classCallCheck(this,t),this.events={}},[{key:"emit",value:function(t){for(var e=this.events[t]||[],i=arguments.length,n=new Array(1<i?i-1:0),o=1;o<i;o++)n[o-1]=arguments[o];for(var s=0,r=e.length;s<r;s++)e[s].apply(e,n)}},{key:"on",value:function(e,i){var t,n=this;return null!=(t=this.events[e])&&t.push(i)||(this.events[e]=[i]),function(){var t;n.events[e]=null==(t=n.events[e])?void 0:t.filter(function(t){return i!==t})}}},{key:"off",value:function(t,e){this.events[t]=null==(t=this.events[t])?void 0:t.filter(function(t){return e!==t})}},{key:"destroy",value:function(){this.events={}}}]))(),z=(()=>_createClass(function t(e,i){var s=this,n=i.wheelMultiplier,n=void 0===n?1:n,o=i.touchMultiplier,o=void 0===o?2:o,i=i.normalizeWheel,i=void 0!==i&&i;_classCallCheck(this,t),_defineProperty(this,"onTouchStart",function(t){var e=(i=t.targetTouches?t.targetTouches[0]:t).clientX,i=i.clientY;s.touchStart.x=e,s.touchStart.y=i,s.lastDelta={x:0,y:0},s.emitter.emit("scroll",{deltaX:0,deltaY:0,event:t})}),_defineProperty(this,"onTouchMove",function(t){var e=(i=t.targetTouches?t.targetTouches[0]:t).clientX,i=i.clientY,n=-(e-s.touchStart.x)*s.touchMultiplier,o=-(i-s.touchStart.y)*s.touchMultiplier;s.touchStart.x=e,s.touchStart.y=i,s.lastDelta={x:n,y:o},s.emitter.emit("scroll",{deltaX:n,deltaY:o,event:t})}),_defineProperty(this,"onTouchEnd",function(t){s.emitter.emit("scroll",{deltaX:s.lastDelta.x,deltaY:s.lastDelta.y,event:t})}),_defineProperty(this,"onWheel",function(t){var e=t.deltaX,i=t.deltaY;s.normalizeWheel&&(e=p(-100,e,100),i=p(-100,i,100)),e*=s.wheelMultiplier,i*=s.wheelMultiplier,s.emitter.emit("scroll",{deltaX:e,deltaY:i,event:t})}),this.element=e,this.wheelMultiplier=n,this.touchMultiplier=o,this.normalizeWheel=i,this.touchStart={x:null,y:null},this.emitter=new k,this.element.addEventListener("wheel",this.onWheel,{passive:!1}),this.element.addEventListener("touchstart",this.onTouchStart,{passive:!1}),this.element.addEventListener("touchmove",this.onTouchMove,{passive:!1}),this.element.addEventListener("touchend",this.onTouchEnd,{passive:!1})},[{key:"on",value:function(t,e){return this.emitter.on(t,e)}},{key:"destroy",value:function(){this.emitter.destroy(),this.element.removeEventListener("wheel",this.onWheel,{passive:!1}),this.element.removeEventListener("touchstart",this.onTouchStart,{passive:!1}),this.element.removeEventListener("touchmove",this.onTouchMove,{passive:!1}),this.element.removeEventListener("touchend",this.onTouchEnd,{passive:!1})}}]))();return(()=>_createClass(function t(){var r=this,e=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{},i=e.wrapper,i=void 0===i?window:i,n=e.content,n=void 0===n?document.documentElement:n,o=e.wheelEventsTarget,o=void 0===o?i:o,s=e.eventsTarget,s=void 0===s?o:s,l=e.smoothWheel,l=void 0===l||l,a=e.syncTouch,a=void 0!==a&&a,h=e.syncTouchLerp,h=void 0===h?.075:h,c=e.touchInertiaMultiplier,c=void 0===c?35:c,u=e.duration,d=e.easing,d=void 0===d?function(t){return Math.min(1,1.001-Math.pow(2,-10*t))}:d,p=e.lerp,p=void 0===p?!u&&.1:p,v=e.infinite,v=void 0!==v&&v,m=e.orientation,m=void 0===m?"vertical":m,f=e.gestureOrientation,f=void 0===f?"vertical":f,g=e.touchMultiplier,g=void 0===g?1:g,y=e.wheelMultiplier,y=void 0===y?1:y,S=e.normalizeWheel,S=void 0!==S&&S,_=e.autoResize,_=void 0===_||_,e=e.__experimental__naiveDimensions,e=void 0!==e&&e;_classCallCheck(this,t),this.__isSmooth=!1,this.__isScrolling=!1,this.__isStopped=!1,this.__isLocked=!1,this.onVirtualScroll=function(t){var i,n,e,o=t.deltaX,s=t.deltaY;(t=t.event).ctrlKey||(i=t.type.includes("touch"),n=t.type.includes("wheel"),r.options.syncTouch&&i&&"touchstart"===t.type?r.reset():(e="vertical"===r.options.gestureOrientation&&0===s||"horizontal"===r.options.gestureOrientation&&0===o,0===o&&0===s||e||(e=(e=t.composedPath()).slice(0,e.indexOf(r.rootElement))).find(function(t){var e;return(null==(e=t.hasAttribute)?void 0:e.call(t,"data-lenis-prevent"))||i&&(null==(e=t.hasAttribute)?void 0:e.call(t,"data-lenis-prevent-touch"))||n&&(null==(e=t.hasAttribute)?void 0:e.call(t,"data-lenis-prevent-wheel"))||(null==(e=t.classList)?void 0:e.contains("lenis"))&&!(null!=(e=t.classList)&&e.contains("lenis-stopped"))})||(r.isStopped||r.isLocked?t.preventDefault():(r.isSmooth=r.options.syncTouch&&i||r.options.smoothWheel&&n,r.isSmooth?(t.preventDefault(),e=s,"both"===r.options.gestureOrientation?e=Math.abs(s)>Math.abs(o)?s:o:"horizontal"===r.options.gestureOrientation&&(e=o),s=i&&r.options.syncTouch,(o=i&&"touchend"===t.type&&5<Math.abs(e))&&(e=r.velocity*r.options.touchInertiaMultiplier),r.scrollTo(r.targetScroll+e,Object.assign({programmatic:!1},s?{lerp:o?r.options.syncTouchLerp:1}:{lerp:r.options.lerp,duration:r.options.duration,easing:r.options.easing}))):(r.isScrolling=!1,r.animate.stop())))))},this.onNativeScroll=function(){var t;r.__preventNextScrollEvent||r.isScrolling||(t=r.animatedScroll,r.animatedScroll=r.targetScroll=r.actualScroll,r.velocity=0,r.direction=Math.sign(r.animatedScroll-t),r.emit())},window.lenisVersion="1.0.39",i!==document.documentElement&&i!==document.body||(i=window),this.options={wrapper:i,content:n,wheelEventsTarget:o,eventsTarget:s,smoothWheel:l,syncTouch:a,syncTouchLerp:h,touchInertiaMultiplier:c,duration:u,easing:d,lerp:p,infinite:v,gestureOrientation:f,orientation:m,touchMultiplier:g,wheelMultiplier:y,normalizeWheel:S,autoResize:_,__experimental__naiveDimensions:e},this.animate=new w,this.emitter=new k,this.dimensions=new b({wrapper:i,content:n,autoResize:_}),this.toggleClassName("lenis",!0),this.velocity=0,this.isLocked=!1,this.isStopped=!1,this.isSmooth=a||l,this.isScrolling=!1,this.targetScroll=this.animatedScroll=this.actualScroll,this.options.wrapper.addEventListener("scroll",this.onNativeScroll,!1),this.virtualScroll=new z(s,{touchMultiplier:g,wheelMultiplier:y,normalizeWheel:S}),this.virtualScroll.on("scroll",this.onVirtualScroll)},[{key:"destroy",value:function(){this.emitter.destroy(),this.options.wrapper.removeEventListener("scroll",this.onNativeScroll,!1),this.virtualScroll.destroy(),this.dimensions.destroy(),this.toggleClassName("lenis",!1),this.toggleClassName("lenis-smooth",!1),this.toggleClassName("lenis-scrolling",!1),this.toggleClassName("lenis-stopped",!1),this.toggleClassName("lenis-locked",!1)}},{key:"on",value:function(t,e){return this.emitter.on(t,e)}},{key:"off",value:function(t,e){return this.emitter.off(t,e)}},{key:"setScroll",value:function(t){this.isHorizontal?this.rootElement.scrollLeft=t:this.rootElement.scrollTop=t}},{key:"resize",value:function(){this.dimensions.resize()}},{key:"emit",value:function(){this.emitter.emit("scroll",this)}},{key:"reset",value:function(){this.isLocked=!1,this.isScrolling=!1,this.animatedScroll=this.targetScroll=this.actualScroll,this.velocity=0,this.animate.stop()}},{key:"start",value:function(){this.isStopped&&(this.isStopped=!1,this.reset())}},{key:"stop",value:function(){this.isStopped||(this.isStopped=!0,this.animate.stop(),this.reset())}},{key:"raf",value:function(t){var e=t-(this.time||t);this.time=t,this.animate.advance(.001*e)}},{key:"scrollTo",value:function(t){var e,i=this,n=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{},o=n.offset,o=void 0===o?0:o,s=n.immediate,s=void 0!==s&&s,r=n.lock,l=void 0!==r&&r,r=n.duration,r=void 0===r?this.options.duration:r,a=n.easing,a=void 0===a?this.options.easing:a,h=n.lerp,h=void 0===h?!r&&this.options.lerp:h,c=n.onComplete,u=n.force,u=void 0!==u&&u,n=n.programmatic,d=void 0===n||n;if((!this.isStopped&&!this.isLocked||u)&&(["top","left","start"].includes(t)?t=0:["bottom","right","end"].includes(t)?t=this.limit:("string"==typeof t?e=document.querySelector(t):null!=t&&t.nodeType&&(e=t),e&&(this.options.wrapper!==window&&(n=this.options.wrapper.getBoundingClientRect(),o-=this.isHorizontal?n.left:n.top),u=e.getBoundingClientRect(),t=(this.isHorizontal?u.left:u.top)+this.animatedScroll)),"number"==typeof t))if(t+=o,t=Math.round(t),this.options.infinite?d&&(this.targetScroll=this.animatedScroll=this.scroll):t=p(0,t,this.limit),s)this.animatedScroll=this.targetScroll=t,this.setScroll(this.scroll),this.reset(),null!=c&&c(this);else{if(!d){if(t===this.targetScroll)return;this.targetScroll=t}this.animate.fromTo(this.animatedScroll,t,{duration:r,easing:a,lerp:h,onStart:function(){l&&(i.isLocked=!0),i.isScrolling=!0},onUpdate:function(t,e){i.isScrolling=!0,i.velocity=t-i.animatedScroll,i.direction=Math.sign(i.velocity),i.animatedScroll=t,i.setScroll(i.scroll),d&&(i.targetScroll=t),e||i.emit(),e&&(i.reset(),i.emit(),null!=c&&c(i),i.__preventNextScrollEvent=!0,requestAnimationFrame(function(){delete i.__preventNextScrollEvent}))}})}}},{key:"rootElement",get:function(){return this.options.wrapper===window?document.documentElement:this.options.wrapper}},{key:"limit",get:function(){return this.options.__experimental__naiveDimensions?this.isHorizontal?this.rootElement.scrollWidth-this.rootElement.clientWidth:this.rootElement.scrollHeight-this.rootElement.clientHeight:this.dimensions.limit[this.isHorizontal?"x":"y"]}},{key:"isHorizontal",get:function(){return"horizontal"===this.options.orientation}},{key:"actualScroll",get:function(){return this.isHorizontal?this.rootElement.scrollLeft:this.rootElement.scrollTop}},{key:"scroll",get:function(){return this.options.infinite?(t=this.animatedScroll,e=this.limit,(t%e+e)%e):this.animatedScroll;var t,e}},{key:"progress",get:function(){return 0===this.limit?1:this.scroll/this.limit}},{key:"isSmooth",get:function(){return this.__isSmooth},set:function(t){this.__isSmooth!==t&&(this.__isSmooth=t,this.toggleClassName("lenis-smooth",t))}},{key:"isScrolling",get:function(){return this.__isScrolling},set:function(t){this.__isScrolling!==t&&(this.__isScrolling=t,this.toggleClassName("lenis-scrolling",t))}},{key:"isStopped",get:function(){return this.__isStopped},set:function(t){this.__isStopped!==t&&(this.__isStopped=t,this.toggleClassName("lenis-stopped",t))}},{key:"isLocked",get:function(){return this.__isLocked},set:function(t){this.__isLocked!==t&&(this.__isLocked=t,this.toggleClassName("lenis-locked",t))}},{key:"className",get:function(){var t="lenis";return this.isStopped&&(t+=" lenis-stopped"),this.isLocked&&(t+=" lenis-locked"),this.isScrolling&&(t+=" lenis-scrolling"),this.isSmooth&&(t+=" lenis-smooth"),t}},{key:"toggleClassName",value:function(t,e){this.rootElement.classList.toggle(t,e),this.emitter.emit("className change",this)}}]))()}),document.addEventListener("DOMContentLoaded",function(){window.ui_animate_lenis=new Lenis({wrapper:document.documentElement,content:document.body}),requestAnimationFrame(function t(e){window.ui_animate_lenis.raf(e),requestAnimationFrame(t)});var t=document.createElement("style");t.textContent="\n    html {\n      height: auto;\n      scroll-behavior: auto !important;\n    }\n    [data-lenis-prevent],\n    .lenis-prevent {\n      overscroll-behavior: contain;\n    }\n    .lenis-stopped {\n      overflow: hidden;\n    }\n    .lenis-scrolling iframe {\n      pointer-events: none;\n    }\n  ",document.head.appendChild(t),document.addEventListener("click",function(t){var e=t.target.closest('a[href^="#"]');e&&(t.preventDefault(),window.ui_animate_lenis.scrollTo(e.getAttribute("href"),{onComplete:function(){history.pushState(null,null,e.getAttribute("href"))}}))})});
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Lenis = factory());
+})(this, function () {
+  'use strict';
+
+  var version = "1.0.39";
+
+  // Clamp a value between a minimum and maximum value
+  function clamp(min, input, max) {
+    return Math.max(min, Math.min(input, max));
+  }
+
+  // Linearly interpolate between two values using an amount (0 <= t <= 1)
+  function lerp(x, y, t) {
+    return (1 - t) * x + t * y;
+  }
+
+  // http://www.rorydriscoll.com/2016/03/07/frame-rate-independent-damping-using-lerp/
+  function damp(x, y, lambda, dt) {
+    return lerp(x, y, 1 - Math.exp(-lambda * dt));
+  }
+
+  // Calculate the modulo of the dividend and divisor while keeping the result within the same sign as the divisor
+  // https://anguscroll.com/just/just-modulo
+  function modulo(n, d) {
+    return (n % d + d) % d;
+  }
+
+  // Animate class to handle value animations with lerping or easing
+  class Animate {
+    // Advance the animation by the given delta time
+    advance(deltaTime) {
+      var _this$onUpdate;
+      if (!this.isRunning) return;
+      let completed = false;
+      if (this.lerp) {
+        this.value = damp(this.value, this.to, this.lerp * 60, deltaTime);
+        if (Math.round(this.value) === this.to) {
+          this.value = this.to;
+          completed = true;
+        }
+      } else {
+        this.currentTime += deltaTime;
+        const linearProgress = clamp(0, this.currentTime / this.duration, 1);
+        completed = linearProgress >= 1;
+        const easedProgress = completed ? 1 : this.easing(linearProgress);
+        this.value = this.from + (this.to - this.from) * easedProgress;
+      }
+
+      // Call the onUpdate callback with the current value and completed status
+      (_this$onUpdate = this.onUpdate) === null || _this$onUpdate === void 0 || _this$onUpdate.call(this, this.value, completed);
+      if (completed) {
+        this.stop();
+      }
+    }
+
+    // Stop the animation
+    stop() {
+      this.isRunning = false;
+    }
+
+    // Set up the animation from a starting value to an ending value
+    // with optional parameters for lerping, duration, easing, and onUpdate callback
+    fromTo(from, to, {
+      lerp = 0.1,
+      duration = 1,
+      easing = t => t,
+      onStart,
+      onUpdate
+    }) {
+      this.from = this.value = from;
+      this.to = to;
+      this.lerp = lerp;
+      this.duration = duration;
+      this.easing = easing;
+      this.currentTime = 0;
+      this.isRunning = true;
+      onStart === null || onStart === void 0 || onStart();
+      this.onUpdate = onUpdate;
+    }
+  }
+  function debounce(callback, delay) {
+    let timer;
+    return function () {
+      let args = arguments;
+      let context = this;
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        callback.apply(context, args);
+      }, delay);
+    };
+  }
+  class Dimensions {
+    constructor({
+      wrapper,
+      content,
+      autoResize = true,
+      debounce: debounceValue = 250
+    } = {}) {
+      _defineProperty(this, "resize", () => {
+        this.onWrapperResize();
+        this.onContentResize();
+      });
+      _defineProperty(this, "onWrapperResize", () => {
+        if (this.wrapper === window) {
+          this.width = window.innerWidth;
+          this.height = window.innerHeight;
+        } else {
+          this.width = this.wrapper.clientWidth;
+          this.height = this.wrapper.clientHeight;
+        }
+      });
+      _defineProperty(this, "onContentResize", () => {
+        if (this.wrapper === window) {
+          this.scrollHeight = this.content.scrollHeight;
+          this.scrollWidth = this.content.scrollWidth;
+        } else {
+          this.scrollHeight = this.wrapper.scrollHeight;
+          this.scrollWidth = this.wrapper.scrollWidth;
+        }
+      });
+      this.wrapper = wrapper;
+      this.content = content;
+      if (autoResize) {
+        this.debouncedResize = debounce(this.resize, debounceValue);
+        if (this.wrapper === window) {
+          window.addEventListener('resize', this.debouncedResize, false);
+        } else {
+          this.wrapperResizeObserver = new ResizeObserver(this.debouncedResize);
+          this.wrapperResizeObserver.observe(this.wrapper);
+        }
+        this.contentResizeObserver = new ResizeObserver(this.debouncedResize);
+        this.contentResizeObserver.observe(this.content);
+      }
+      this.resize();
+    }
+    destroy() {
+      var _this$wrapperResizeOb, _this$contentResizeOb;
+      (_this$wrapperResizeOb = this.wrapperResizeObserver) === null || _this$wrapperResizeOb === void 0 || _this$wrapperResizeOb.disconnect();
+      (_this$contentResizeOb = this.contentResizeObserver) === null || _this$contentResizeOb === void 0 || _this$contentResizeOb.disconnect();
+      window.removeEventListener('resize', this.debouncedResize, false);
+    }
+    get limit() {
+      return {
+        x: this.scrollWidth - this.width,
+        y: this.scrollHeight - this.height
+      };
+    }
+  }
+  class Emitter {
+    constructor() {
+      this.events = {};
+    }
+    emit(event, ...args) {
+      let callbacks = this.events[event] || [];
+      for (let i = 0, length = callbacks.length; i < length; i++) {
+        callbacks[i](...args);
+      }
+    }
+    on(event, cb) {
+      var _this$events$event;
+      // Add the callback to the event's callback list, or create a new list with the callback
+      ((_this$events$event = this.events[event]) === null || _this$events$event === void 0 ? void 0 : _this$events$event.push(cb)) || (this.events[event] = [cb]);
+
+      // Return an unsubscribe function
+      return () => {
+        var _this$events$event2;
+        this.events[event] = (_this$events$event2 = this.events[event]) === null || _this$events$event2 === void 0 ? void 0 : _this$events$event2.filter(i => cb !== i);
+      };
+    }
+    off(event, callback) {
+      var _this$events$event3;
+      this.events[event] = (_this$events$event3 = this.events[event]) === null || _this$events$event3 === void 0 ? void 0 : _this$events$event3.filter(i => callback !== i);
+    }
+    destroy() {
+      this.events = {};
+    }
+  }
+  class VirtualScroll {
+    constructor(element, {
+      wheelMultiplier = 1,
+      touchMultiplier = 2,
+      normalizeWheel = false
+    }) {
+      // Event handler for 'touchstart' event
+      _defineProperty(this, "onTouchStart", event => {
+        const {
+          clientX,
+          clientY
+        } = event.targetTouches ? event.targetTouches[0] : event;
+        this.touchStart.x = clientX;
+        this.touchStart.y = clientY;
+        this.lastDelta = {
+          x: 0,
+          y: 0
+        };
+        this.emitter.emit('scroll', {
+          deltaX: 0,
+          deltaY: 0,
+          event
+        });
+      });
+      // Event handler for 'touchmove' event
+      _defineProperty(this, "onTouchMove", event => {
+        const {
+          clientX,
+          clientY
+        } = event.targetTouches ? event.targetTouches[0] : event;
+        const deltaX = -(clientX - this.touchStart.x) * this.touchMultiplier;
+        const deltaY = -(clientY - this.touchStart.y) * this.touchMultiplier;
+        this.touchStart.x = clientX;
+        this.touchStart.y = clientY;
+        this.lastDelta = {
+          x: deltaX,
+          y: deltaY
+        };
+        this.emitter.emit('scroll', {
+          deltaX,
+          deltaY,
+          event
+        });
+      });
+      _defineProperty(this, "onTouchEnd", event => {
+        this.emitter.emit('scroll', {
+          deltaX: this.lastDelta.x,
+          deltaY: this.lastDelta.y,
+          event
+        });
+      });
+      // Event handler for 'wheel' event
+      _defineProperty(this, "onWheel", event => {
+        let {
+          deltaX,
+          deltaY
+        } = event;
+        if (this.normalizeWheel) {
+          deltaX = clamp(-100, deltaX, 100);
+          deltaY = clamp(-100, deltaY, 100);
+        }
+        deltaX *= this.wheelMultiplier;
+        deltaY *= this.wheelMultiplier;
+        this.emitter.emit('scroll', {
+          deltaX,
+          deltaY,
+          event
+        });
+      });
+      this.element = element;
+      this.wheelMultiplier = wheelMultiplier;
+      this.touchMultiplier = touchMultiplier;
+      this.normalizeWheel = normalizeWheel;
+      this.touchStart = {
+        x: null,
+        y: null
+      };
+      this.emitter = new Emitter();
+      this.element.addEventListener('wheel', this.onWheel, {
+        passive: false
+      });
+      this.element.addEventListener('touchstart', this.onTouchStart, {
+        passive: false
+      });
+      this.element.addEventListener('touchmove', this.onTouchMove, {
+        passive: false
+      });
+      this.element.addEventListener('touchend', this.onTouchEnd, {
+        passive: false
+      });
+    }
+
+    // Add an event listener for the given event and callback
+    on(event, callback) {
+      return this.emitter.on(event, callback);
+    }
+
+    // Remove all event listeners and clean up
+    destroy() {
+      this.emitter.destroy();
+      this.element.removeEventListener('wheel', this.onWheel, {
+        passive: false
+      });
+      this.element.removeEventListener('touchstart', this.onTouchStart, {
+        passive: false
+      });
+      this.element.removeEventListener('touchmove', this.onTouchMove, {
+        passive: false
+      });
+      this.element.removeEventListener('touchend', this.onTouchEnd, {
+        passive: false
+      });
+    }
+  }
+  class Lenis {
+    constructor({
+      wrapper = window,
+      content = document.documentElement,
+      wheelEventsTarget = wrapper,
+      eventsTarget = wheelEventsTarget,
+      smoothWheel = true,
+      syncTouch = false,
+      syncTouchLerp = 0.075,
+      touchInertiaMultiplier = 35,
+      duration,
+      easing = t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp = !duration && 0.1,
+      infinite = false,
+      orientation = 'vertical',
+      gestureOrientation = 'vertical',
+      touchMultiplier = 1,
+      wheelMultiplier = 1,
+      normalizeWheel = false,
+      autoResize = true,
+      __experimental__naiveDimensions = false
+    } = {}) {
+      this.__isSmooth = false;
+      this.__isScrolling = false;
+      this.__isStopped = false;
+      this.__isLocked = false;
+      this.onVirtualScroll = ({
+        deltaX,
+        deltaY,
+        event
+      }) => {
+        if (event.ctrlKey) return;
+        const isTouch = event.type.includes('touch');
+        const isWheel = event.type.includes('wheel');
+        const isTapToStop = this.options.syncTouch && isTouch && event.type === 'touchstart';
+        if (isTapToStop) {
+          this.reset();
+          return;
+        }
+        const isClick = deltaX === 0 && deltaY === 0;
+        const isUnknownGesture = this.options.gestureOrientation === 'vertical' && deltaY === 0 || this.options.gestureOrientation === 'horizontal' && deltaX === 0;
+        if (isClick || isUnknownGesture) {
+          return;
+        }
+        let composedPath = event.composedPath();
+        composedPath = composedPath.slice(0, composedPath.indexOf(this.rootElement));
+        if (!!composedPath.find(node => {
+          var _a, _b, _c, _d, _e;
+          return ((_a = node.hasAttribute) === null || _a === void 0 ? void 0 : _a.call(node, 'data-lenis-prevent')) || isTouch && ((_b = node.hasAttribute) === null || _b === void 0 ? void 0 : _b.call(node, 'data-lenis-prevent-touch')) || isWheel && ((_c = node.hasAttribute) === null || _c === void 0 ? void 0 : _c.call(node, 'data-lenis-prevent-wheel')) || ((_d = node.classList) === null || _d === void 0 ? void 0 : _d.contains('lenis')) && !((_e = node.classList) === null || _e === void 0 ? void 0 : _e.contains('lenis-stopped'));
+        })) return;
+        if (this.isStopped || this.isLocked) {
+          event.preventDefault();
+          return;
+        }
+        this.isSmooth = this.options.syncTouch && isTouch || this.options.smoothWheel && isWheel;
+        if (!this.isSmooth) {
+          this.isScrolling = false;
+          this.animate.stop();
+          return;
+        }
+        event.preventDefault();
+        let delta = deltaY;
+        if (this.options.gestureOrientation === 'both') {
+          delta = Math.abs(deltaY) > Math.abs(deltaX) ? deltaY : deltaX;
+        } else if (this.options.gestureOrientation === 'horizontal') {
+          delta = deltaX;
+        }
+        const syncTouch = isTouch && this.options.syncTouch;
+        const isTouchEnd = isTouch && event.type === 'touchend';
+        const hasTouchInertia = isTouchEnd && Math.abs(delta) > 5;
+        if (hasTouchInertia) {
+          delta = this.velocity * this.options.touchInertiaMultiplier;
+        }
+        this.scrollTo(this.targetScroll + delta, Object.assign({
+          programmatic: false
+        }, syncTouch ? {
+          lerp: hasTouchInertia ? this.options.syncTouchLerp : 1
+        } : {
+          lerp: this.options.lerp,
+          duration: this.options.duration,
+          easing: this.options.easing
+        }));
+      };
+      this.onNativeScroll = () => {
+        if (this.__preventNextScrollEvent) return;
+        if (!this.isScrolling) {
+          const lastScroll = this.animatedScroll;
+          this.animatedScroll = this.targetScroll = this.actualScroll;
+          this.velocity = 0;
+          this.direction = Math.sign(this.animatedScroll - lastScroll);
+          this.emit();
+        }
+      };
+      window.lenisVersion = version;
+      if (wrapper === document.documentElement || wrapper === document.body) {
+        wrapper = window;
+      }
+      this.options = {
+        wrapper,
+        content,
+        wheelEventsTarget,
+        eventsTarget,
+        smoothWheel,
+        syncTouch,
+        syncTouchLerp,
+        touchInertiaMultiplier,
+        duration,
+        easing,
+        lerp,
+        infinite,
+        gestureOrientation,
+        orientation,
+        touchMultiplier,
+        wheelMultiplier,
+        normalizeWheel,
+        autoResize,
+        __experimental__naiveDimensions
+      };
+      this.animate = new Animate();
+      this.emitter = new Emitter();
+      this.dimensions = new Dimensions({
+        wrapper,
+        content,
+        autoResize
+      });
+      this.toggleClassName('lenis', true);
+      this.velocity = 0;
+      this.isLocked = false;
+      this.isStopped = false;
+      this.isSmooth = syncTouch || smoothWheel;
+      this.isScrolling = false;
+      this.targetScroll = this.animatedScroll = this.actualScroll;
+      this.options.wrapper.addEventListener('scroll', this.onNativeScroll, false);
+      this.virtualScroll = new VirtualScroll(eventsTarget, {
+        touchMultiplier,
+        wheelMultiplier,
+        normalizeWheel
+      });
+      this.virtualScroll.on('scroll', this.onVirtualScroll);
+    }
+    destroy() {
+      this.emitter.destroy();
+      this.options.wrapper.removeEventListener('scroll', this.onNativeScroll, false);
+      this.virtualScroll.destroy();
+      this.dimensions.destroy();
+      this.toggleClassName('lenis', false);
+      this.toggleClassName('lenis-smooth', false);
+      this.toggleClassName('lenis-scrolling', false);
+      this.toggleClassName('lenis-stopped', false);
+      this.toggleClassName('lenis-locked', false);
+    }
+    on(event, callback) {
+      return this.emitter.on(event, callback);
+    }
+    off(event, callback) {
+      return this.emitter.off(event, callback);
+    }
+    setScroll(scroll) {
+      if (this.isHorizontal) {
+        this.rootElement.scrollLeft = scroll;
+      } else {
+        this.rootElement.scrollTop = scroll;
+      }
+    }
+    resize() {
+      this.dimensions.resize();
+    }
+    emit() {
+      this.emitter.emit('scroll', this);
+    }
+    reset() {
+      this.isLocked = false;
+      this.isScrolling = false;
+      this.animatedScroll = this.targetScroll = this.actualScroll;
+      this.velocity = 0;
+      this.animate.stop();
+    }
+    start() {
+      if (!this.isStopped) return;
+      this.isStopped = false;
+      this.reset();
+    }
+    stop() {
+      if (this.isStopped) return;
+      this.isStopped = true;
+      this.animate.stop();
+      this.reset();
+    }
+    raf(time) {
+      const deltaTime = time - (this.time || time);
+      this.time = time;
+      this.animate.advance(deltaTime * 0.001);
+    }
+    scrollTo(target, {
+      offset = 0,
+      immediate = false,
+      lock = false,
+      duration = this.options.duration,
+      easing = this.options.easing,
+      lerp = !duration && this.options.lerp,
+      onComplete,
+      force = false,
+      programmatic = true
+    } = {}) {
+      if ((this.isStopped || this.isLocked) && !force) return;
+      if (['top', 'left', 'start'].includes(target)) {
+        target = 0;
+      } else if (['bottom', 'right', 'end'].includes(target)) {
+        target = this.limit;
+      } else {
+        let node;
+        if (typeof target === 'string') {
+          node = document.querySelector(target);
+        } else if (target === null || target === void 0 ? void 0 : target.nodeType) {
+          node = target;
+        }
+        if (node) {
+          if (this.options.wrapper !== window) {
+            const wrapperRect = this.options.wrapper.getBoundingClientRect();
+            offset -= this.isHorizontal ? wrapperRect.left : wrapperRect.top;
+          }
+          const rect = node.getBoundingClientRect();
+          target = (this.isHorizontal ? rect.left : rect.top) + this.animatedScroll;
+        }
+      }
+      if (typeof target !== 'number') return;
+      target += offset;
+      target = Math.round(target);
+      if (this.options.infinite) {
+        if (programmatic) {
+          this.targetScroll = this.animatedScroll = this.scroll;
+        }
+      } else {
+        target = clamp(0, target, this.limit);
+      }
+      if (immediate) {
+        this.animatedScroll = this.targetScroll = target;
+        this.setScroll(this.scroll);
+        this.reset();
+        onComplete === null || onComplete === void 0 ? void 0 : onComplete(this);
+        return;
+      }
+      if (!programmatic) {
+        if (target === this.targetScroll) return;
+        this.targetScroll = target;
+      }
+      this.animate.fromTo(this.animatedScroll, target, {
+        duration,
+        easing,
+        lerp,
+        onStart: () => {
+          if (lock) this.isLocked = true;
+          this.isScrolling = true;
+        },
+        onUpdate: (value, completed) => {
+          this.isScrolling = true;
+          this.velocity = value - this.animatedScroll;
+          this.direction = Math.sign(this.velocity);
+          this.animatedScroll = value;
+          this.setScroll(this.scroll);
+          if (programmatic) {
+            this.targetScroll = value;
+          }
+          if (!completed) this.emit();
+          if (completed) {
+            this.reset();
+            this.emit();
+            onComplete === null || onComplete === void 0 ? void 0 : onComplete(this);
+            this.__preventNextScrollEvent = true;
+            requestAnimationFrame(() => {
+              delete this.__preventNextScrollEvent;
+            });
+          }
+        }
+      });
+    }
+    get rootElement() {
+      return this.options.wrapper === window ? document.documentElement : this.options.wrapper;
+    }
+    get limit() {
+      if (this.options.__experimental__naiveDimensions) {
+        if (this.isHorizontal) {
+          return this.rootElement.scrollWidth - this.rootElement.clientWidth;
+        } else {
+          return this.rootElement.scrollHeight - this.rootElement.clientHeight;
+        }
+      } else {
+        return this.dimensions.limit[this.isHorizontal ? 'x' : 'y'];
+      }
+    }
+    get isHorizontal() {
+      return this.options.orientation === 'horizontal';
+    }
+    get actualScroll() {
+      return this.isHorizontal ? this.rootElement.scrollLeft : this.rootElement.scrollTop;
+    }
+    get scroll() {
+      return this.options.infinite ? modulo(this.animatedScroll, this.limit) : this.animatedScroll;
+    }
+    get progress() {
+      return this.limit === 0 ? 1 : this.scroll / this.limit;
+    }
+    get isSmooth() {
+      return this.__isSmooth;
+    }
+    set isSmooth(value) {
+      if (this.__isSmooth !== value) {
+        this.__isSmooth = value;
+        this.toggleClassName('lenis-smooth', value);
+      }
+    }
+    get isScrolling() {
+      return this.__isScrolling;
+    }
+    set isScrolling(value) {
+      if (this.__isScrolling !== value) {
+        this.__isScrolling = value;
+        this.toggleClassName('lenis-scrolling', value);
+      }
+    }
+    get isStopped() {
+      return this.__isStopped;
+    }
+    set isStopped(value) {
+      if (this.__isStopped !== value) {
+        this.__isStopped = value;
+        this.toggleClassName('lenis-stopped', value);
+      }
+    }
+    get isLocked() {
+      return this.__isLocked;
+    }
+    set isLocked(value) {
+      if (this.__isLocked !== value) {
+        this.__isLocked = value;
+        this.toggleClassName('lenis-locked', value);
+      }
+    }
+    get className() {
+      let className = 'lenis';
+      if (this.isStopped) className += ' lenis-stopped';
+      if (this.isLocked) className += ' lenis-locked';
+      if (this.isScrolling) className += ' lenis-scrolling';
+      if (this.isSmooth) className += ' lenis-smooth';
+      return className;
+    }
+    toggleClassName(name, value) {
+      this.rootElement.classList.toggle(name, value);
+      this.emitter.emit('className change', this);
+    }
+  }
+  return Lenis;
+});
+document.addEventListener('DOMContentLoaded', function () {
+  window.ui_animate_lenis = new Lenis({
+    wrapper: document.documentElement,
+    // typically html
+    content: document.body // usually body or your specific content div
+  });
+  function raf(time) {
+    window.ui_animate_lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // Create a style element
+  var styleElement = document.createElement('style');
+
+  // Set the CSS rules
+  styleElement.textContent = `
+    html {
+      height: auto;
+      scroll-behavior: auto !important;
+    }
+    [data-lenis-prevent],
+    .lenis-prevent {
+      overscroll-behavior: contain;
+    }
+    .lenis-stopped {
+      overflow: hidden;
+    }
+    .lenis-scrolling iframe {
+      pointer-events: none;
+    }
+  `;
+  document.head.appendChild(styleElement);
+  document.addEventListener('click', e => {
+    const anchor = e.target.closest('a[href]');
+    if (!anchor) return;
+    const href = anchor.getAttribute('href');
+    const url = new URL(href, window.location.href);
+    if (url.hash) {
+      // If the URL points to a different page we let the browser handle it
+      if (url.pathname !== window.location.pathname || url.origin !== window.location.origin) return;
+      e.preventDefault();
+      window.ui_animate_lenis.scrollTo(url.hash, {
+        onComplete: () => {
+          history.pushState(null, null, href);
+        }
+      });
+    }
+  });
+});

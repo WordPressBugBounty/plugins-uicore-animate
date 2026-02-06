@@ -183,8 +183,9 @@ class Admin
         }
         wp_enqueue_style('uianim-style', UICORE_ANIMATE_ASSETS . '/css/' . $style . '.css');
         \wp_add_inline_style('uianim-style', '
-         .uicore-animate-scroll {
-                animation: .5s linear uicoreFadeIn both;
+          .uicore-animate-scroll {
+                animation-fill-mode: both;
+                animation-timing-function: linear;
                 animation-timeline: view(block);
             }
 
@@ -202,10 +203,5 @@ class Admin
 
         \wp_enqueue_script('uicore_animate-editor');
         \wp_add_inline_script('uicore_animate-editor', 'var uicore_animations_list = ' . wp_json_encode($animations) . ';');
-?>
-        <script>
-            var uicore_animations_list = <?php echo wp_json_encode($animations); ?>;
-        </script>
-<?php
     }
 }

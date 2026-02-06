@@ -3,8 +3,8 @@ Contributors: uicore
 Tags: elementor, gutenberg, blocks, animation, scroll animations
 Requires at least: 4.6
 Requires PHP: 7.4
-Tested up to: 6.8.1
-Stable tag: 2.1.7
+Tested up to: 6.9.0
+Stable tag: 2.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,42 @@ Yes, UiCore Animate is designed to be easy to use, even for beginners. The inter
 
 
 == Changelog ==
+
+= 2.2.3 =
+* FIX - Simple Sticky Scroll was not working correctly
+* FIX - Animation styles set through the UiCore Framework had no effect
+* FIX - Smooth Scroll was blocking anchor links to different pages
+* FIX - Entrance Animations were blocking hover animations in UiCore Blocks
+
+= 2.2.2 =
+* FIX - Animated Border Hover glow bugs
+* FIX - ScaleIn animation bug in Uicore Blocks
+* FIX - Elementor editor issue with Intro Words preloader
+
+= 2.2.1 =
+* NEW - Added 20 new Animated Background in Gutenberg
+* FIX - Animated Background Elementor bugs
+
+= 2.2.0 =
+* NEW - Added 20 new Animated Background
+* FIX - Issue with page transitions and OS reduced motion accessibility
+* FIX - Smooth scroll issue with full anchors URLs
+* FIX - Animated borders issue with optmized markup experiment
+
+= 2.1.10 =
+* FIX - Split Text Animation and GTranslate compatibility
+* UPD - Accesibility improvements
+
+= 2.1.9 =
+* FIX - Fixed Elementor Scroll Container animations being dependent on UiCore Framework
+* FIX - Fixed Smooth Scroll remaining enabled when Animations were disabled in the Animations tab
+* FIX - Fixed Animated Borders not working when applied directly to widgets
+* FIX - Fixed scroll animations briefly appearing before animating
+* FIX - Fixed Split Text animation not working until a language change when GTranslate was active
+
+= 2.1.8 =
+* FIX - Animation flicker in gutenberg
+
 = 2.1.7 =
 * FIX - Animation delay not working for gutenberg blocks
 * NEW – Added an option to run the preloader animation only on a user's first visit to the site.
