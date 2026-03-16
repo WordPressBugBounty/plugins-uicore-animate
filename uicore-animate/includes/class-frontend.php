@@ -192,9 +192,9 @@ class Frontend
             // TODO: Apparently when activating framework with Animate enabled, the `uianim_style` setting might be an array.
             // After saving becomes a string. Is a good idea to investigate and insure consistency in the data format.
             if (is_array($style)) {
-                $style = (isset($style['value']) && $style['value']) ? $style['value'] : 'style1';
+                $style = (!empty($style['value']) && $style['value']) ? $style['value'] : 'style1';
             } else {
-                $style = (isset($style)) ? $style : 'style1';
+                $style = (!empty($style)) ? $style : 'style1';
             }
 
             $files[] = UICORE_ANIMATE_PATH . '/assets/css/' . $style . '.css';

@@ -3,8 +3,8 @@ Contributors: uicore
 Tags: elementor, gutenberg, blocks, animation, scroll animations
 Requires at least: 4.6
 Requires PHP: 7.4
-Tested up to: 6.9.0
-Stable tag: 2.2.3
+Tested up to: 6.9.4
+Stable tag: 2.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,10 @@ Yes, UiCore Animate is designed to be easy to use, even for beginners. The inter
 
 
 == Changelog ==
+
+= 2.2.4 =
+* FIX - Animated Backgrounds were overflowing the container's spaces for Uicore Blocks
+* FIX - The default Animation Style was not working
 
 = 2.2.3 =
 * FIX - Simple Sticky Scroll was not working correctly
